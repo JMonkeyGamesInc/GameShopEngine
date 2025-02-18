@@ -38,8 +38,12 @@ public class Selector {
 
     public ArrayList<Geometry> selectors;
 
+    public ArrayList<Geometry> movers;
+
     SimpleApplication app;
-    public String mode = "NONE"; // CURRENCYMESH, CURRENCYSURFACE, VECTOR3F
+    public String mode = "NONE"; //NONE, CURRENCYMESH, CURRENCYSURFACE, VECTOR3F
+
+    public String action = "SELECT"; //SELECT MOVE OPEN ANIMATE
     public Selector(SimpleApplication app){
 
         this.app = app;
@@ -101,6 +105,8 @@ public class Selector {
                             material.setColor("Color", ColorRGBA.Blue);
 
                             selectors.get(Integer.parseInt(hit.split(" ")[1])).setMaterial(material);
+
+                            mode = "CURRENCYMESH";
                         }
                     }
                 }

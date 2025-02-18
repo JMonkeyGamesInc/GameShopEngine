@@ -8,17 +8,21 @@ import com.jme3.app.SimpleApplication;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.math.Vector4f;
+import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.scene.Node;
 import com.jmonkeygamesinc.gameshop.global.CurrencyMeshSingleton;
 import com.jmonkeygamesinc.gameshop.graphics.GameShopATMS;
 import com.jmonkeygamesinc.gameshop.graphics.GameShopCurrencyLine;
 import com.jmonkeygamesinc.gameshop.graphics.GameShopCurrencyMesh;
 import com.jmonkeygamesinc.gameshop.graphics.GameShopCurrencySurface;
+import com.jmonkeygamesinc.gameshop.niftygui.StartScreenController;
 import com.jmonkeygamesinc.gameshop.ui.Selector;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import de.lessvoid.nifty.Nifty;
 //import com.simsilica.lemur.Button;
 //import com.simsilica.lemur.Command;
 //import com.simsilica.lemur.Container;
@@ -41,6 +45,7 @@ import java.io.IOException;
 public final class MyGame extends SimpleApplication {
 
     Context context;
+    private Nifty nifty;
     public MyGame(Context context){
         super();
 
@@ -49,6 +54,24 @@ public final class MyGame extends SimpleApplication {
     @Override
     public void simpleInitApp() {
         flyCam.setEnabled(false);
+
+
+        NiftyJmeDisplay niftyDisplay = NiftyJmeDisplay.newNiftyJmeDisplay(
+                assetManager,
+                inputManager,
+                audioRenderer,
+                guiViewPort);
+        nifty = niftyDisplay.getNifty();
+        StartScreenController startScreen = new StartScreenController(this);
+        nifty.fromXml("Interface/start_screen.xml", "start", startScreen);
+
+        // attach the nifty display to the gui view port as a processor
+        guiViewPort.addProcessor(niftyDisplay);
+
+        // disable the fly cam
+//        flyCam.setEnabled(false);
+//        flyCam.setDragToRotate(true);
+        inputManager.setCursorVisible(true);
         //for i shapes draw
 //        final Sphere mySphere = new Sphere(10, 50, 50);
 //        final Geometry geometry = new Geometry("ball", mySphere);

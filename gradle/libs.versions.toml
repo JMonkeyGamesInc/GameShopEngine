@@ -13,6 +13,7 @@ constraintlayout = "2.1.4"
 jme3-android-native = { module = "org.jmonkeyengine:jme3-android-native", version.ref = "jme3Core" }
 jme3-core = { module = "org.jmonkeyengine:jme3-core", version.ref = "jme3Core" }
 jme3-effects = { module = "org.jmonkeyengine:jme3-effects", version.ref = "jme3Core" }
+jme3-niftygui = { module = "org.jmonkeyengine:jme3-niftygui", version.ref = "jme3Core" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }

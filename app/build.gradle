@@ -30,6 +30,11 @@ android {
 
 dependencies {
 
+
+
+    // GUI Library
+    implementation libs.jme3.niftygui
+
     /*add the JMonkeyEngine Dependencies*/
     implementation libs.jme3.core
     //noinspection GradleDependency

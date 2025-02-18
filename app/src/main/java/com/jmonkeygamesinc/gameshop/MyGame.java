@@ -1,5 +1,8 @@
 package com.jmonkeygamesinc.gameshop;
 
+import android.content.Context;
+import android.os.Environment;
+
 import com.jme3.app.LegacyApplication;
 import com.jme3.app.SimpleApplication;
 import com.jme3.math.ColorRGBA;
@@ -12,6 +15,10 @@ import com.jmonkeygamesinc.gameshop.graphics.GameShopCurrencyLine;
 import com.jmonkeygamesinc.gameshop.graphics.GameShopCurrencyMesh;
 import com.jmonkeygamesinc.gameshop.graphics.GameShopCurrencySurface;
 import com.jmonkeygamesinc.gameshop.ui.Selector;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 //import com.simsilica.lemur.Button;
 //import com.simsilica.lemur.Command;
 //import com.simsilica.lemur.Container;
@@ -33,6 +40,12 @@ import com.jmonkeygamesinc.gameshop.ui.Selector;
  */
 public final class MyGame extends SimpleApplication {
 
+    Context context;
+    public MyGame(Context context){
+        super();
+
+        this.context = context;
+    }
     @Override
     public void simpleInitApp() {
         flyCam.setEnabled(false);
@@ -67,7 +80,46 @@ public final class MyGame extends SimpleApplication {
 
         Selector selector = new Selector(this);
 
+        writeFileOnInternalStorage();//context, "hi.file", "HI EVERYONE");
+
 
 
     }
+
+    public void writeFileOnInternalStorage(){ //Context mcoContext, String sFileName, String sBody){
+        //System.out.println("FILE: " + mcoContext.getFilesDir());
+        //File dir = new File(mcoContext.getFilesDir(), "mydir");
+        File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
+        File file = new File(dir, "hi.file");
+//        if(!dir.exists()){
+//            dir.mkdir();
+//        }
+
+        //Write to file
+        try (FileWriter fileWriter = new FileWriter(file)) {
+            fileWriter.append("HI EVERYONE!");
+        } catch (IOException e) {
+            //Handle exception
+        }
+
+//        try {
+//            File gpxfile = new File(dir, sFileName);
+//            FileWriter writer = new FileWriter(gpxfile);
+//            writer.append(sBody);
+//            writer.flush();
+//            writer.close();
+//        } catch (Exception e){
+//            e.printStackTrace();
+//        }
+    }
+//    public void writeFile(){
+//
+//        File fileMetadata = new File("hi.txt");
+//        fileMetadata.setName("hi.txt");
+//        java.io.File filePath = new java.io.File("files/hi.txt");
+//        FileContent mediaContent = new FileContent("text/jpeg", filePath);
+//        DriveService driveService = driveService.files().create(fileMetadata, mediaContent)
+//                .setFields("id")
+//                .execute();
+//    }
 }

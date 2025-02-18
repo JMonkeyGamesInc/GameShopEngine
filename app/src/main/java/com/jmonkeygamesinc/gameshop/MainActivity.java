@@ -1,5 +1,6 @@
 package com.jmonkeygamesinc.gameshop;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -21,6 +22,9 @@ import com.jme3.view.surfaceview.JmeSurfaceView;
 import com.jme3.view.surfaceview.OnExceptionThrown;
 import com.jme3.view.surfaceview.OnRendererCompleted;
 
+import java.io.File;
+import java.io.FileWriter;
+
 /**
  * <b>NB: Please Open this example <u>root module</u> using Android Studio; because android build scripts are different from java builds.</b>
  * <br/>
@@ -40,7 +44,7 @@ public final class MainActivity extends AppCompatActivity implements OnRendererC
         final JmeSurfaceView jmeSurfaceView = findViewById(R.id.jmeSurfaceView);
         jmeSurfaceView.setDestructionPolicy(JmeSurfaceView.DestructionPolicy.KEEP_WHEN_FINISH);
         /*set the jme game*/
-        jmeSurfaceView.setLegacyApplication(new MyGame());
+        jmeSurfaceView.setLegacyApplication(new MyGame(this.getApplicationContext()));
         jmeSurfaceView.setOnExceptionThrown(this);
         jmeSurfaceView.setOnRendererCompleted(this);
         /*start the game*/
@@ -81,4 +85,6 @@ public final class MainActivity extends AppCompatActivity implements OnRendererC
                 View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |
                 View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
     }
+
+
 }

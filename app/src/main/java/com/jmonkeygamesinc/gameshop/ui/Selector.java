@@ -44,16 +44,18 @@ public class Selector {
 
         this.app = app;
         selectors = new ArrayList<>();
+        int i = 0;
         for (GameShopCurrencyMesh cm: CurrencyMeshSingleton.getInstance().cMeshes){
 
             Box box = new Box(.5f, .5f, .5f);
-            Geometry geom = new Geometry("Box", box);
+            Geometry geom = new Geometry("Box " + i, box);
             Material material = new Material(app.getAssetManager().loadAsset(new AssetKey<>("Common/MatDefs/Misc/Unshaded.j3md")));
             material.setColor("Color", ColorRGBA.Red);
             geom.setMaterial(material);
             geom.setLocalTranslation(cm.gspSurfaces[0].vInfinitesimals[cm.gspSurfaces[0].vInfinitesimals.length/2].infinitesimals[cm.gspSurfaces[0].vInfinitesimals[cm.gspSurfaces[0].vInfinitesimals.length/2].infinitesimals.length/2]);
             app.getRootNode().attachChild(geom);
             selectors.add(geom);
+            i++;
         }
 
         initKeys();
@@ -86,13 +88,19 @@ public class Selector {
                     for (int i = 0; i < results.size(); i++) {
                         String hit = results.getCollision(i).getGeometry().getName();
 
-                        if (hit.equals("Box")) {
+                        if (hit.contains("Box")) {
                             // For each hit, we know distance, impact point, name of geometry.
                             float dist = results.getCollision(i).getDistance();
                             Vector3f pt = results.getCollision(i).getContactPoint();
 
                             System.out.println("* Collision #" + i);
                             System.out.println("  You shot " + hit + " at " + pt + ", " + dist + " wu away.");
+                            selectedCM = CurrencyMeshSingleton.getInstance().cMeshes.get(Integer.parseInt(hit.split(" ")[1]));
+
+                            Material material = new Material(app.getAssetManager().loadAsset(new AssetKey<>("Common/MatDefs/Misc/Unshaded.j3md")));
+                            material.setColor("Color", ColorRGBA.Blue);
+
+                            selectors.get(Integer.parseInt(hit.split(" ")[1])).setMaterial(material);
                         }
                     }
                 }

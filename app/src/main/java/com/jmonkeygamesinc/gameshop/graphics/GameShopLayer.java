@@ -14,8 +14,8 @@ import com.jme3.texture.image.DefaultImageRaster;
 //import static org.lwjgl.opengl.GL30.*;
 /**
  *
- * @author gameshopengine
- */
+ * @author Lynden Jay Evans of JMonkeyGames Inc.
+ * */
 public class GameShopLayer {
 
     public int width;

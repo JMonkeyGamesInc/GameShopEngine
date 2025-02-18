@@ -29,7 +29,7 @@ import com.jmonkeygamesinc.gameshop.ui.Selector;
  * <li>Start the game using #{@link com.jme3.view.surfaceview.JmeSurfaceView#startRenderer(int)}</li>
  * </ol>
  *
- * @author pavl_g
+ * @author Lynden Jay Evans of JMonkeyGames Inc.
  */
 public final class MyGame extends SimpleApplication {
 

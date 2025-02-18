@@ -8,7 +8,7 @@ import com.jme3.texture.Image;
 
 /**
  *
- * @author gameshopengine
+ * @author Lynden Jay Evans of JMonkeyGames Inc.
  */
 public class GameShopATMS {
 

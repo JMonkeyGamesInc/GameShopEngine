@@ -14,6 +14,10 @@ import com.jme3.util.BufferUtils;
 
 import java.util.Arrays;
 
+/**
+ *
+ * @author Lynden Jay Evans of JMonkeyGames Inc.
+ */
 public class GameShopCurrencyMesh {
 
     public float[] vertices;

@@ -27,6 +27,10 @@ import com.jmonkeygamesinc.gameshop.graphics.GameShopCurrencySurface;
 
 import java.util.ArrayList;
 
+/**
+ *
+ * @author Lynden Jay Evans of JMonkeyGames Inc.
+ */
 public class Selector {
 
     public GameShopCurrencyMesh selectedCM;

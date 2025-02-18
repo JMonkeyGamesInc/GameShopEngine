@@ -2,6 +2,10 @@ package com.jmonkeygamesinc.gameshop.graphics;
 
 import com.jme3.math.FastMath;
 import com.jme3.math.Vector3f;
+/**
+ *
+ * @author Lynden Jay Evans of JMonkeyGames Inc.
+ */
 public class GameShopCurrencyLine {
 
     public Vector3f[] points;

@@ -29,7 +29,7 @@ import com.jme3.view.surfaceview.OnRendererCompleted;
  * <br>
  * <b>Note : use #{@link AppCompatActivity#setRequestedOrientation(int)} and #{@link ActivityInfo#SCREEN_ORIENTATION_LANDSCAPE} for LandScape mode or specify that under the <activity> activity tag xml.</b>
  *
- * @author pavl_g
+ * @author Lynden Jay Evans of JMonkeyGames Inc.
  */
 public final class MainActivity extends AppCompatActivity implements OnRendererCompleted, OnExceptionThrown {
     @Override

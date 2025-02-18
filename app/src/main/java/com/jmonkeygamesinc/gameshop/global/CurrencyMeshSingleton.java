@@ -4,6 +4,10 @@ import com.jmonkeygamesinc.gameshop.graphics.GameShopCurrencyMesh;
 
 import java.util.ArrayList;
 
+/**
+ *
+ * @author Lynden Jay Evans of JMonkeyGames Inc.
+ */
 public class CurrencyMeshSingleton {
 
     private static CurrencyMeshSingleton _instance;

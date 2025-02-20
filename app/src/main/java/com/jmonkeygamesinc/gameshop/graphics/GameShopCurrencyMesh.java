@@ -42,7 +42,11 @@ public class GameShopCurrencyMesh {
 
     public Node node;
     public SimpleApplication app;
-    public GameShopCurrencyMesh(SimpleApplication app, Node node, GameShopCurrencySurface[] gspSurfaces, GameShopATMS atms){
+
+    public String name;
+    public GameShopCurrencyMesh(SimpleApplication app, String name, Node node, GameShopCurrencySurface[] gspSurfaces, GameShopATMS atms){
+
+        this.name = name;
 
         this.app = app;
         this.node = node;

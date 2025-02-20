@@ -17,7 +17,10 @@ public class GameShopCurrencySurface {
     public float infWidth;
     public float infHeight;
 
-    public GameShopCurrencySurface(GameShopCurrencyLine[] currencyLines){
+    public String name;
+    public GameShopCurrencySurface(String name, GameShopCurrencyLine[] currencyLines){
+
+        this.name = name;
 
         this.currencyLines = currencyLines;
         makeVerticalLines();

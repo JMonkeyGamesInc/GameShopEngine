@@ -3,6 +3,11 @@ package com.jmonkeygamesinc.gameshop.niftygui;
 import androidx.annotation.NonNull;
 
 import com.jme3.app.Application;
+import com.jme3.math.Vector3f;
+import com.jmonkeygamesinc.gameshop.global.CurrencyMeshSingleton;
+import com.jmonkeygamesinc.gameshop.graphics.GameShopCurrencyLine;
+import com.jmonkeygamesinc.gameshop.graphics.GameShopCurrencyMesh;
+import com.jmonkeygamesinc.gameshop.graphics.GameShopCurrencySurface;
 import com.jmonkeygamesinc.gameshop.ui.Selector;
 
 import java.util.List;
@@ -56,16 +61,6 @@ public class StartScreenController implements ScreenController {
        fillMyListBox();
 
 
-//        TextBuilder textBuilder = new TextBuilder("myListBox"){{
-//
-//         width("100%");
-//         height("10%");
-//         text("Hello ListBox");
-//         color(Color.WHITE);
-//        }
-//        };
-//
-//        textBuilder.build(Objects.requireNonNull(screen.findElementById("panel_hierarchy")));
 
     }
 
@@ -91,9 +86,37 @@ public class StartScreenController implements ScreenController {
      */
     public void fillMyListBox() {
         ListBox listBox = screen.findNiftyControl("myListBox", ListBox.class);
-        listBox.addItem("a");
-        listBox.addItem("b");
-        listBox.addItem("c");
+//        listBox.addItem("a");
+//        listBox.addItem("b");
+//        listBox.addItem("c");
+//        listBox.addItem("a");
+//        listBox.addItem("b");
+//        listBox.addItem("c");
+
+        for (GameShopCurrencyMesh cm: CurrencyMeshSingleton.getInstance().cMeshes){
+
+            listBox.addItem("[CurrencyMesh] " + cm.name);
+
+            for (GameShopCurrencySurface cs: cm.gspSurfaces){
+
+                listBox.addItem("    " + "[CurrencySurface] " + cs.name);
+
+                int i = 0;
+                for (GameShopCurrencyLine cl: cs.currencyLines){
+
+                    listBox.addItem("        " + "[CurrencyLine] " + i);
+
+                    int j = 0;
+                    for (Vector3f v: cl.points){
+
+                        listBox.addItem("            " + "[Vector3f]" + j);
+                        j++;
+                    }
+                    i++;
+                }
+            }
+
+        }
     }
 
     /**

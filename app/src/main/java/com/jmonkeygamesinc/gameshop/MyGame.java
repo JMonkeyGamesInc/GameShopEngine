@@ -56,22 +56,7 @@ public final class MyGame extends SimpleApplication {
         flyCam.setEnabled(false);
 
 
-        NiftyJmeDisplay niftyDisplay = NiftyJmeDisplay.newNiftyJmeDisplay(
-                assetManager,
-                inputManager,
-                audioRenderer,
-                guiViewPort);
-        nifty = niftyDisplay.getNifty();
-        StartScreenController startScreen = new StartScreenController(this);
-        nifty.fromXml("Interface/start_screen.xml", "start", startScreen);
 
-        // attach the nifty display to the gui view port as a processor
-        guiViewPort.addProcessor(niftyDisplay);
-
-        // disable the fly cam
-//        flyCam.setEnabled(false);
-//        flyCam.setDragToRotate(true);
-        inputManager.setCursorVisible(true);
         //for i shapes draw
 //        final Sphere mySphere = new Sphere(10, 50, 50);
 //        final Geometry geometry = new Geometry("ball", mySphere);
@@ -102,6 +87,25 @@ public final class MyGame extends SimpleApplication {
         CurrencyMeshSingleton.getInstance().cMeshes.add(cm);
 
         Selector selector = new Selector(this);
+
+        NiftyJmeDisplay niftyDisplay = NiftyJmeDisplay.newNiftyJmeDisplay(
+                assetManager,
+                inputManager,
+                audioRenderer,
+                guiViewPort);
+        nifty = niftyDisplay.getNifty();
+        StartScreenController startScreen = new StartScreenController(this, selector);
+//        nifty.loadControlFile("nifty-default-controls.xml");
+//        nifty.loadStyleFile("nifty-default-styles.xml");
+        nifty.fromXml("Interface/start_screen.xml", "start", startScreen);
+        //startScreen.fillMyListBox();
+        // attach the nifty display to the gui view port as a processor
+        guiViewPort.addProcessor(niftyDisplay);
+
+        // disable the fly cam
+//        flyCam.setEnabled(false);
+//        flyCam.setDragToRotate(true);
+        inputManager.setCursorVisible(true);
 
         writeFileOnInternalStorage();//context, "hi.file", "HI EVERYONE");
 

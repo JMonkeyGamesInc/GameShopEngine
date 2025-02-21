@@ -95,21 +95,21 @@ public class StartScreenController implements ScreenController {
 
         for (GameShopCurrencyMesh cm: CurrencyMeshSingleton.getInstance().cMeshes){
 
-            listBox.addItem("[CurrencyMesh] " + cm.name);
+            listBox.addItem("[CurrencyMesh]:" + cm.name);
 
             for (GameShopCurrencySurface cs: cm.gspSurfaces){
 
-                listBox.addItem("    " + "[CurrencySurface] " + cs.name);
+                listBox.addItem("    " + "[CurrencySurface]:" + cs.name);
 
                 int i = 0;
                 for (GameShopCurrencyLine cl: cs.currencyLines){
 
-                    listBox.addItem("        " + "[CurrencyLine] " + i);
+                    listBox.addItem("        " + "[CurrencyLine]:" + i);
 
                     int j = 0;
                     for (Vector3f v: cl.points){
 
-                        listBox.addItem("            " + "[Vector3f]" + j);
+                        listBox.addItem("            " + "[Vector3f]:" + j);
                         j++;
                     }
                     i++;
@@ -126,10 +126,26 @@ public class StartScreenController implements ScreenController {
     public void onMyListBoxSelectionChanged(final String id, final ListBoxSelectionChangedEvent<String> event) {
         List<String> selection = event.getSelection();
         for (String selectedItem : selection) {
-            System.out.println("listbox selection [" + selectedItem + "]");
+            //System.out.println("listbox selection [" + selectedItem + "]");
+            //setSelectorToName(selectedItem);
+            selector.selectedObjectName = selectedItem;
         }
     }
 
+//    public void setSelectorToName(String name){
+//
+//        if (name.contains("[CurrencyMesh]")){
+//            selector.selectedObjectName = name;
+//        } else if (name.contains("[CurrencySurface]")){
+//            selector.selectedObjectName = name;
+//
+//        } else if (name.contains("[CurrencyLine]")){
+//
+//        } else if (name.contains("[Vector3f]")){
+//
+//        }
+//
+//    }
 
     /**
      * Stop the Application. Nifty invokes this method (via reflection) after

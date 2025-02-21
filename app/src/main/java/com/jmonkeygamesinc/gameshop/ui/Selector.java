@@ -22,6 +22,7 @@ import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.shape.Box;
 import com.jmonkeygamesinc.gameshop.global.CurrencyMeshSingleton;
+import com.jmonkeygamesinc.gameshop.graphics.GameShopCurrencyLine;
 import com.jmonkeygamesinc.gameshop.graphics.GameShopCurrencyMesh;
 import com.jmonkeygamesinc.gameshop.graphics.GameShopCurrencySurface;
 
@@ -41,9 +42,12 @@ public class Selector {
 
     public ArrayList<Geometry> movers;
     public Geometry selectedMover;
+
     public boolean moveEnabled = false;
     SimpleApplication app;
-    public String mode = "NONE"; //NONE, CURRENCYMESH, CURRENCYSURFACE, VECTOR3
+
+    public String selectedObjectName = "";
+    public String mode = "CURRENCYSURFACE"; //NONE, CURRENCYMESH, CURRENCYSURFACE, VECTOR3
 
     public String action = "SELECT"; //SELECT MOVE OPEN ANIMATE
     public Selector(SimpleApplication app){
@@ -57,18 +61,71 @@ public class Selector {
         initKeys();
     }
 
+    public void selectObject(){
+
+        if (mode.equals("CURRENCYMESH")){
+
+            for (GameShopCurrencyMesh cm: CurrencyMeshSingleton.getInstance().cMeshes){
+                if (cm.name.equals(selectedObjectName)){
+
+                    selectedCM = cm;
+                }
+            }
+
+        } else if (mode.equals("CURRENCYSURFACE")){
+
+            for (GameShopCurrencyMesh cm: CurrencyMeshSingleton.getInstance().cMeshes){
+
+                for (GameShopCurrencySurface cs: cm.gspSurfaces){
+
+                    if (cs.name.equals(selectedObjectName)){
+
+                        selectedCM = cm;
+                        selectedCS = cs;
+
+                    }
+                }
+            }
+        } else if (mode.equals("CURRENCYLINE")){
+
+            for (GameShopCurrencyMesh cm: CurrencyMeshSingleton.getInstance().cMeshes){
+
+                for (GameShopCurrencySurface cs: cm.gspSurfaces){
+
+                    for (GameShopCurrencyLine cl: cs.currencyLines){
+
+//                        if (cl.name.equals(selectedObjectName)){
+//
+//                            selectedCM = cm;
+//                            selectedCS = cs;
+//
+//                        }
+                    }
+
+                }
+            }
+        } else if (mode.equals("VECTOR3F")){
+
+        }
+
+    }
     public void resetSelection(){
 
         for (Geometry g: selectors){
 
             Material material = new Material(app.getAssetManager().loadAsset(new AssetKey<>("Common/MatDefs/Misc/Unshaded.j3md")));
+             if (!mode.equals("CURRENCYSURFACE")) {
             material.setColor("Color", ColorRGBA.Red);
+                            } else {
+                                material.setColor("Color", ColorRGBA.Orange);
+                            }
             g.setMaterial(material);
 
         }
     }
 
     public void clearSelection(){
+
 
         for (Geometry g: selectors){
 
@@ -90,6 +147,8 @@ public class Selector {
     }
 
     public void clearMovers(){
+
+        moveEnabled = false;
 
         for (Geometry g: movers){
 
@@ -139,6 +198,26 @@ public class Selector {
         } else if (mode.equals("CURRENCYSURFACE")){
 
             int i = 0;
+            for (GameShopCurrencyMesh cm : CurrencyMeshSingleton.getInstance().cMeshes) {
+
+                for (GameShopCurrencySurface cs: cm.gspSurfaces) {
+
+                    for (GameShopCurrencyLine cl: cs.currencyLines) {
+
+                        for (Vector3f v: cl.points) {
+                            Box box = new Box(.25f, .25f, .25f);
+                            Geometry geom = new Geometry("SelectBox " + i, box);
+                            Material material = new Material(app.getAssetManager().loadAsset(new AssetKey<>("Common/MatDefs/Misc/Unshaded.j3md")));
+                            material.setColor("Color", ColorRGBA.Orange);
+                            geom.setMaterial(material);
+                            geom.setLocalTranslation(v);
+                            app.getRootNode().attachChild(geom);
+                            selectors.add(geom);
+                            i++;
+                        }
+                    }
+                }
+            }
 
         } else if (mode.equals("VECTOR3")){
 
@@ -146,53 +225,105 @@ public class Selector {
         }
     }
 
-    public void enableMove(){
+    public void enableMove() {
 
 //        Material materialMatch = new Material(app.getAssetManager().loadAsset(new AssetKey<>("Common/MatDefs/Misc/Unshaded.j3md")));
 //        materialMatch.setColor("Color", ColorRGBA.Blue);
-        for (Geometry g: selectors){
+        if (mode.equals("CURRENCYMESH")) {
+            for (Geometry g : selectors) {
 
-            if (g.equals(selectedSelector)){
+                if (g.equals(selectedSelector)) {
 
-                if (!moveEnabled){
-                    for (int i = 0; i < 6; i++){
-                        Box box = new Box(.25f, .25f, .25f);
-                        Geometry geom = new Geometry("MoveBox " + i, box);
-                        Material material = new Material(app.getAssetManager().loadAsset(new AssetKey<>("Common/MatDefs/Misc/Unshaded.j3md")));
-                        material.setColor("Color", ColorRGBA.Red);
-                        geom.setMaterial(material);
-                        geom.setLocalTranslation(g.getLocalTranslation());
-                        //LEFT RIGHT TOP BOTTOM FORWARD BACKWARD
-                        if (i == 0){
+                    if (!moveEnabled) {
+                        for (int i = 0; i < 6; i++) {
+                            Box box = new Box(.25f, .25f, .25f);
+                            Geometry geom = new Geometry("MoveBox " + i, box);
+                            Material material = new Material(app.getAssetManager().loadAsset(new AssetKey<>("Common/MatDefs/Misc/Unshaded.j3md")));
 
-                            geom.move(-1,0,0);
+                           // if (!mode.equals("CURRENCYSURFACE")) {
+                                material.setColor("Color", ColorRGBA.Red);
+//                            } else {
+//                                material.setColor("Color", ColorRGBA.Orange);
+//                            }
+                            geom.setMaterial(material);
+                            geom.setLocalTranslation(g.getLocalTranslation());
+                            //LEFT RIGHT TOP BOTTOM FORWARD BACKWARD
+                            if (i == 0) {
 
-                        } else if (i == 1){
+                                geom.move(-1, 0, 0);
 
-                            geom.move(1,0,0);
-                        } else if (i == 2){
+                            } else if (i == 1) {
 
-                            geom.move(0,1,0);
-                        } else if (i == 3){
+                                geom.move(1, 0, 0);
+                            } else if (i == 2) {
 
-                            geom.move(0,-1,0);
-                        } else if (i == 4) {
+                                geom.move(0, 1, 0);
+                            } else if (i == 3) {
 
-                            geom.move(0,0,-1);
-                        } else if (i == 5) {
-                            geom.move(0,0,1);
+                                geom.move(0, -1, 0);
+                            } else if (i == 4) {
+
+                                geom.move(0, 0, -1);
+                            } else if (i == 5) {
+                                geom.move(0, 0, 1);
+                            }
+
+                            //geom.setLocalTranslation(cm.gspSurfaces[0].vInfinitesimals[cm.gspSurfaces[0].vInfinitesimals.length / 2].infinitesimals[cm.gspSurfaces[0].vInfinitesimals[cm.gspSurfaces[0].vInfinitesimals.length / 2].infinitesimals.length / 2]);
+                            app.getRootNode().attachChild(geom);
+                            movers.add(geom);
+                            // i++;
                         }
-
-                        //geom.setLocalTranslation(cm.gspSurfaces[0].vInfinitesimals[cm.gspSurfaces[0].vInfinitesimals.length / 2].infinitesimals[cm.gspSurfaces[0].vInfinitesimals[cm.gspSurfaces[0].vInfinitesimals.length / 2].infinitesimals.length / 2]);
-                        app.getRootNode().attachChild(geom);
-                        movers.add(geom);
-                       // i++;
+                        moveEnabled = true;
                     }
-                    moveEnabled = true;
                 }
+            }
+        } else if (mode.equals("CURRENCYSURFACE")) {
 
+            for (Geometry g : selectors) {
+
+                if (g.equals(selectedSelector)) {
+
+                    if (!moveEnabled) {
+                        for (int i = 0; i < 6; i++) {
+                            Box box = new Box(.20f, .20f, .20f);
+                            Geometry geom = new Geometry("MoveBox " + i, box);
+                            Material material = new Material(app.getAssetManager().loadAsset(new AssetKey<>("Common/MatDefs/Misc/Unshaded.j3md")));
+                            material.setColor("Color", ColorRGBA.Red);
+                            geom.setMaterial(material);
+                            geom.setLocalTranslation(g.getLocalTranslation());
+                            //LEFT RIGHT TOP BOTTOM FORWARD BACKWARD
+                            if (i == 0) {
+
+                                geom.move(-.75f, 0, 0);
+
+                            } else if (i == 1) {
+
+                                geom.move(.75f, 0, 0);
+                            } else if (i == 2) {
+
+                                geom.move(0, .75f, 0);
+                            } else if (i == 3) {
+
+                                geom.move(0, -.75f, 0);
+                            } else if (i == 4) {
+
+                                geom.move(0, 0, -.75f);
+                            } else if (i == 5) {
+                                geom.move(0, 0, .75f);
+                            }
+
+                            //geom.setLocalTranslation(cm.gspSurfaces[0].vInfinitesimals[cm.gspSurfaces[0].vInfinitesimals.length / 2].infinitesimals[cm.gspSurfaces[0].vInfinitesimals[cm.gspSurfaces[0].vInfinitesimals.length / 2].infinitesimals.length / 2]);
+                            app.getRootNode().attachChild(geom);
+                            movers.add(geom);
+                            // i++;
+                        }
+                        moveEnabled = true;
+                    }
+                }
             }
         }
+
+
 
     }
 
@@ -238,6 +369,8 @@ public class Selector {
                         if (count == 0){
 
                             resetSelection();
+                            clearMovers();
+
                             if (mode.equals("NONE")) {
                                 selectedCM = null;
                             }
@@ -248,6 +381,8 @@ public class Selector {
                             String hit = results.getCollision(i).getGeometry().getName();
 
                             if (hit.contains("SelectBox")) {
+                                resetSelection();
+                                clearMovers();
                                 // For each hit, we know distance, impact point, name of geometry.
                                 float dist = results.getCollision(i).getDistance();
                                 Vector3f pt = results.getCollision(i).getContactPoint();
@@ -267,6 +402,11 @@ public class Selector {
 
 
                                 } else if (mode.equals("CURRENCYSURFACE")){
+                                    Material material = new Material(app.getAssetManager().loadAsset(new AssetKey<>("Common/MatDefs/Misc/Unshaded.j3md")));
+                                    material.setColor("Color", ColorRGBA.Blue);
+
+                                    selectors.get(Integer.parseInt(hit.split(" ")[1])).setMaterial(material);
+                                    selectedSelector = selectors.get(Integer.parseInt(hit.split(" ")[1]));
 
 
                                 } else if (mode.equals("VECTOR3")){
@@ -274,6 +414,7 @@ public class Selector {
 
                                 }
                                 //mode = "CURRENCYMESH";
+                                enableMove();
                             }
                             break;
                         }

@@ -461,7 +461,12 @@ public class GameShopCurrencyMesh {
     }
 
 
-    public void drawShapes(){
+    public void updateShapes(){
+
+        //node.c
+        //node.getChild(0).
+    }
+    public void initShapes(){
 
 
         Mesh m = new Mesh();
@@ -503,12 +508,19 @@ public class GameShopCurrencyMesh {
         mat.setTexture("ColorMap", texture);
         geom.setMaterial(mat);
 
+
+         //node.getChild(0).set
+
         // Attaching our geometry to the root node.
         node.attachChild(geom);
 
         this.app.getRootNode().attachChild(node);
 
     }
+
+//    public void updateShapes(){
+//
+//    }
 
 //    public void allocateVertices(Vector3f[] vertices){
 //        

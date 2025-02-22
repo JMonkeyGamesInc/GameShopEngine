@@ -20,6 +20,7 @@ import com.jme3.math.Ray;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
+import com.jme3.scene.Node;
 import com.jme3.scene.shape.Box;
 import com.jmonkeygamesinc.gameshop.global.CurrencyMeshSingleton;
 import com.jmonkeygamesinc.gameshop.graphics.GameShopCurrencyLine;
@@ -52,6 +53,8 @@ public class Selector {
     public String mode = "CURRENCYSURFACE"; //NONE, CURRENCYMESH, CURRENCYSURFACE, VECTOR3
 
     public String action = "SELECT"; //SELECT MOVE OPEN ANIMATE
+
+    public Vector2f lastPosition;
     public Selector(SimpleApplication app){
 
         this.app = app;
@@ -456,9 +459,11 @@ public class Selector {
                         for (int i = 0; i < results.size(); i++) {
                             String hit = results.getCollision(i).getGeometry().getName();
 
-                            if (hit.contains("SelectBox")) {
-                                resetSelection();
-                                clearMovers();
+
+                            if (hit.contains("MoveBox")) {
+                                //resetSelection();
+                               //clearMovers();
+                                resetMovers();
                                 // For each hit, we know distance, impact point, name of geometry.
                                 float dist = results.getCollision(i).getDistance();
                                 Vector3f pt = results.getCollision(i).getContactPoint();
@@ -466,40 +471,92 @@ public class Selector {
                                 System.out.println("* Collision #" + i);
                                 System.out.println("  You shot " + hit + " at " + pt + ", " + dist + " wu away.");
 
-                                if (mode.equals("NONE")) {
-                                    //selectedCM = CurrencyMeshSingleton.getInstance().cMeshes.get(Integer.parseInt(hit.split(" ")[1]));
+//                                if (mode.equals("NONE")) {
+//                                    //selectedCM = CurrencyMeshSingleton.getInstance().cMeshes.get(Integer.parseInt(hit.split(" ")[1]));
+//
+//                                    Material material = new Material(app.getAssetManager().loadAsset(new AssetKey<>("Common/MatDefs/Misc/Unshaded.j3md")));
+//                                    material.setColor("Color", ColorRGBA.Blue);
+//
+//                                    selectors.get(Integer.parseInt(hit.split(" ")[1])).setMaterial(material);
+//                                    selectedSelector = selectors.get(Integer.parseInt(hit.split(" ")[1]));
+//                                } else
+
+                                if (mode.equals("CURRENCYMESH")){
 
                                     Material material = new Material(app.getAssetManager().loadAsset(new AssetKey<>("Common/MatDefs/Misc/Unshaded.j3md")));
                                     material.setColor("Color", ColorRGBA.Blue);
 
-                                    selectors.get(Integer.parseInt(hit.split(" ")[1])).setMaterial(material);
-                                    selectedSelector = selectors.get(Integer.parseInt(hit.split(" ")[1]));
-                                } else if (mode.equals("CURRENCYMESH")){
-
-                                    Material material = new Material(app.getAssetManager().loadAsset(new AssetKey<>("Common/MatDefs/Misc/Unshaded.j3md")));
-                                    material.setColor("Color", ColorRGBA.Blue);
-
-                                    selectors.get(Integer.parseInt(hit.split(" ")[1])).setMaterial(material);
-                                    selectedSelector = selectors.get(Integer.parseInt(hit.split(" ")[1]));
-
+                                    movers.get(Integer.parseInt(hit.split(" ")[1])).setMaterial(material);
+                                    selectedMover = movers.get(Integer.parseInt(hit.split(" ")[1]));
+                                    lastPosition = new Vector2f(event.getX(), event.getX());
 
                                 } else if (mode.equals("CURRENCYSURFACE")){
                                     Material material = new Material(app.getAssetManager().loadAsset(new AssetKey<>("Common/MatDefs/Misc/Unshaded.j3md")));
                                     material.setColor("Color", ColorRGBA.Blue);
 
-                                    selectors.get(Integer.parseInt(hit.split(" ")[1])).setMaterial(material);
-                                    selectedSelector = selectors.get(Integer.parseInt(hit.split(" ")[1]));
+                                    movers.get(Integer.parseInt(hit.split(" ")[1])).setMaterial(material);
+                                    selectedMover = movers.get(Integer.parseInt(hit.split(" ")[1]));
 
+                                    lastPosition = new Vector2f(event.getX(), event.getX());
 
                                 } else if (mode.equals("VECTOR3")){
 
 
                                 }
                                 //mode = "CURRENCYMESH";
-                                enableMove();
+                                //enableMove();
                             }
                             break;
                         }
+
+                    for (int i = 0; i < results.size(); i++) {
+                        String hit = results.getCollision(i).getGeometry().getName();
+
+
+                        if (hit.contains("SelectBox")) {
+                            resetSelection();
+                            clearMovers();
+                            // For each hit, we know distance, impact point, name of geometry.
+                            float dist = results.getCollision(i).getDistance();
+                            Vector3f pt = results.getCollision(i).getContactPoint();
+
+                            System.out.println("* Collision #" + i);
+                            System.out.println("  You shot " + hit + " at " + pt + ", " + dist + " wu away.");
+
+                            if (mode.equals("NONE")) {
+                                //selectedCM = CurrencyMeshSingleton.getInstance().cMeshes.get(Integer.parseInt(hit.split(" ")[1]));
+
+                                Material material = new Material(app.getAssetManager().loadAsset(new AssetKey<>("Common/MatDefs/Misc/Unshaded.j3md")));
+                                material.setColor("Color", ColorRGBA.Blue);
+
+                                selectors.get(Integer.parseInt(hit.split(" ")[1])).setMaterial(material);
+                                selectedSelector = selectors.get(Integer.parseInt(hit.split(" ")[1]));
+                            } else if (mode.equals("CURRENCYMESH")){
+
+                                Material material = new Material(app.getAssetManager().loadAsset(new AssetKey<>("Common/MatDefs/Misc/Unshaded.j3md")));
+                                material.setColor("Color", ColorRGBA.Blue);
+
+                                selectors.get(Integer.parseInt(hit.split(" ")[1])).setMaterial(material);
+                                selectedSelector = selectors.get(Integer.parseInt(hit.split(" ")[1]));
+
+
+                            } else if (mode.equals("CURRENCYSURFACE")){
+                                Material material = new Material(app.getAssetManager().loadAsset(new AssetKey<>("Common/MatDefs/Misc/Unshaded.j3md")));
+                                material.setColor("Color", ColorRGBA.Blue);
+
+                                selectors.get(Integer.parseInt(hit.split(" ")[1])).setMaterial(material);
+                                selectedSelector = selectors.get(Integer.parseInt(hit.split(" ")[1]));
+
+
+                            } else if (mode.equals("VECTOR3")){
+
+
+                            }
+                            //mode = "CURRENCYMESH";
+                            enableMove();
+                        }
+                        break;
+                    }
                    // }
 
                     if (action.equals("MOVE")){
@@ -513,9 +570,167 @@ public class Selector {
                     if (action.equals("ANIMATE")){
 
                     }
+                } else if (event.getType() == TouchEvent.Type.MOVE && selectedMover != null){
+
+                    Vector2f currentPosition = new Vector2f(event.getX(), event.getY());
+                    Vector3f moveDir = new Vector3f();
+                    System.out.println("LAST " + lastPosition);
+                    System.out.println("CURRENT " + currentPosition);
+                    for (int i = 0; i < 6; i++){
+
+
+                        if (selectedMover.equals(selectors.get(i))){
+
+                            if (currentPosition.distance(lastPosition) > 0f){
+
+                                System.out.println("Moving");
+                                if (i == 0){
+
+                                    if (currentPosition.x - lastPosition.x > 0){
+
+                                        moveSelectorAndVector(new Vector3f(.1f, 0, 0));
+                                    }  else {
+                                        moveSelectorAndVector(new Vector3f(-.1f, 0, 0));
+
+                                    }
+                                } else if (i == 1){
+
+                                    if (currentPosition.x - lastPosition.x > 0){
+
+                                        moveSelectorAndVector(new Vector3f(.1f, 0, 0));
+                                    }  else {
+                                        moveSelectorAndVector(new Vector3f(-.1f, 0, 0));
+
+                                    }
+                                } else if (i == 2){
+
+                                    if (currentPosition.y - lastPosition.y > 0){
+
+                                        moveSelectorAndVector(new Vector3f(0, .1f, 0));
+                                    }  else {
+                                        moveSelectorAndVector(new Vector3f(0, -.1f, 0));
+
+                                    }
+                                } else if (i == 3){
+
+                                    if (currentPosition.y - lastPosition.y > 0){
+
+                                        moveSelectorAndVector(new Vector3f(0, .1f, 0));
+                                    }  else {
+                                        moveSelectorAndVector(new Vector3f(0, -.1f, 0));
+
+                                    }
+                                } else if (i == 4){
+
+                                    if (currentPosition.x - lastPosition.x > 0){
+
+                                        moveSelectorAndVector(new Vector3f(.1f, 0, 0));
+                                    }  else {
+                                        moveSelectorAndVector(new Vector3f(-.1f, 0, 0));
+
+                                    }
+                                } else if (i == 5){
+
+                                    if (currentPosition.x - lastPosition.x > 0){
+
+                                        moveSelectorAndVector(new Vector3f(.1f, 0, 0));
+                                    }  else {
+                                        moveSelectorAndVector(new Vector3f(-.1f, 0, 0));
+
+                                    }
+                                }
+                            }
+
+                        }
+//                        //LEFT RIGHT TOP BOTTOM FORWARD BACKWARD
+//                        if (i == 0) {
+//
+//                            geom.move(-.75f, 0, 0);
+//
+//                        } else if (i == 1) {
+//
+//                            geom.move(.75f, 0, 0);
+//                        } else if (i == 2) {
+//
+//                            geom.move(0, .75f, 0);
+//                        } else if (i == 3) {
+//
+//                            geom.move(0, -.75f, 0);
+//                        } else if (i == 4) {
+//
+//                            geom.move(0, 0, -.75f);
+//                        } else if (i == 5) {
+//                            geom.move(0, 0, .75f);
+//                        }
+                    }
+
                 }
             }
         }
     };
+
+    public void moveSelectorAndVector(Vector3f distance){
+
+        boolean found = false;
+
+        int lastI = 0;
+        int lastJ = 0;
+        int lastK = 0;
+        int lastL = 0;
+
+        int l = 0;
+        for (GameShopCurrencyMesh cm: CurrencyMeshSingleton.getInstance().cMeshes) {
+            if (selectedCM.equals(cm)){
+                int k = 0;
+                for (GameShopCurrencySurface cs: cm.gspSurfaces){
+                    if (selectedCS.equals(cs)){
+                        int j = 0;
+                        for (GameShopCurrencyLine cl: cs.currencyLines){
+                            if (selectedCL.equals(cl)){
+
+                                int i = 0;
+                                for (Vector3f v: cl.points){
+                                    if (selectedVector3f.equals(v)){
+                                       // cl.points[i] = new Vector3f(v.add(distance));
+                                        found = true;
+                                    }
+                                    i++;
+                                    if (found){
+                                        lastI = i;
+                                        break;
+                                    }
+                                }
+
+                            }
+                            j++;
+                            if (found){
+                                lastJ = j;
+                                break;
+                            }
+                        }
+                    }
+                    k++;
+                    if (found){
+                        lastK = k;
+                        break;
+                    }
+                }
+            }
+            l++;
+            if (found){
+                lastL = l;
+                break;
+            }
+        }
+
+        CurrencyMeshSingleton.getInstance().cMeshes.get(lastL).gspSurfaces[lastK].currencyLines[lastJ].points[lastI] = new Vector3f(selectedVector3f.add(distance));
+        CurrencyMeshSingleton.getInstance().cMeshes.get(lastL).node.detachAllChildren();
+        CurrencyMeshSingleton.getInstance().cMeshes.get(lastL).initShapes();
+
+        for (Geometry g: movers){
+            g.move(distance);
+        }
+        selectedSelector.move(distance);
+    }
 
 }

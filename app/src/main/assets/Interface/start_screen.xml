@@ -21,64 +21,16 @@
                         <control id="myListBox" name="listBox" vertical="on" horizontal="on" displayItems="15" selection="Single" />
 
                     </panel>
-<!--                    <panel id="panel_save" backgroundColor="#f60f" height="10%" width="100%" align="center" valign="center" childLayout="vertical">-->
-<!--                        <interact onClick="save()" />-->
-<!--                        <text id="text" font="aurulent-sans-16.fnt" color="#00ff" text="Save" align="center" valign="center" />-->
-<!--                    </panel>-->
 
-<!--                    <panel id="panel_break_1" height="4%" width="100%" align="center" valign="center" childLayout="vertical"></panel>-->
-
-<!--                    <panel id="panel_load" backgroundColor="#f60f" height="10%" width="100%" align="center" valign="center" childLayout="vertical">-->
-<!--                        <interact onClick="load()" />-->
-<!--                        <text id="text" font="aurulent-sans-16.fnt" color="#00ff" text="Load" align="center" valign="center" />-->
-<!--                    </panel>-->
-
-<!--                    <panel id="panel_break_2" height="4%" width="100%" align="center" valign="center" childLayout="vertical"></panel>-->
-
-
-<!--                    <panel id="panel_move" backgroundColor="#f60f" height="10%" width="100%" align="center" valign="center" childLayout="vertical">-->
-<!--                        <interact onClick="move()" />-->
-<!--                        <text id="text" font="aurulent-sans-16.fnt" color="#00ff" text="Move" align="center" valign="center" />-->
-<!--                    </panel>-->
-
-<!--                    <panel id="panel_break_3" height="4%" width="100%" align="center" valign="center" childLayout="vertical"></panel>-->
-
-<!--                    <panel id="panel_select" backgroundColor="#f60f" height="10%" width="100%" align="center" valign="center" childLayout="vertical">-->
-<!--                        <interact onClick="select()" />-->
-<!--                        <text id="text" font="aurulent-sans-16.fnt" color="#00ff" text="Select" align="center" valign="center" />-->
-<!--                    </panel>-->
-
-<!--                    <panel id="panel_break_4" height="4%" width="100%" align="center" valign="center" childLayout="vertical"></panel>-->
-
-
-<!--                    <panel id="panel_open" backgroundColor="#f60f" height="10%" width="100%" align="center" valign="center" childLayout="vertical">-->
-<!--                        <interact onClick="open()" />-->
-<!--                        <text id="text" font="aurulent-sans-16.fnt" color="#00ff" text="Open" align="center" valign="center" />-->
-<!--                    </panel>-->
-
-<!--                    <panel id="panel_break_5" height="4%" width="100%" align="center" valign="center" childLayout="vertical"></panel>-->
-
-
-<!--                    <panel id="panel_animate" backgroundColor="#f60f" height="10%" width="100%" align="center" valign="center" childLayout="vertical">-->
-<!--                        <interact onClick="animate()" />-->
-<!--                        <text id="text" font="aurulent-sans-16.fnt" color="#00ff" text="Animate" align="center" valign="center" />-->
-<!--                    </panel>-->
-
-<!--                    <panel id="panel_label_gameshop" height="10%" width="100%"-->
-
-<!--                    <control name="label" text="GameShop" />-->
-<!--                    <control id="saveButton" name="button" label="Save" />-->
-<!--                    <control id="loadButton" name="button" label="Load"   />-->
-<!--                    <control id="moveButton" name="button" label="Move"   />-->
-<!--                    <control id="selectButton" name="button" label="Select"  />-->
-<!--                    <control id="openButton" name="button" label="Open"   />-->
-<!--                    <control id="animateButton" name="button" label="Animate"  />-->
                 </panel>
                 <panel id="panel_middle" height="100%" width="50%" childLayout="vertical">
 
                 </panel>
                 <panel id="panel_selected_object" backgroundColor="#aaaf" height="100%" width="25%" childLayout="vertical">
 
+                    <panel id="panel_selected_object_text" backgroundColor="#ffff" height="10%" width="100%" childLayout="horizontal">
+                        <text id="text_selected_object" font="aurulent-sans-16.fnt" color="#000f" text="Selected Object" />
+                    </panel>
                 </panel>
 
 

@@ -82,7 +82,7 @@ public final class MyGame extends SimpleApplication {
         GameShopCurrencySurface cs = new GameShopCurrencySurface("0", cl);
 
         GameShopCurrencyMesh cm = new GameShopCurrencyMesh(this, "0", new Node("SquareCircle"), new GameShopCurrencySurface[]{cs}, atms);
-        cm.drawShapes();
+        cm.initShapes();
 
         CurrencyMeshSingleton.getInstance().cMeshes.add(cm);
 

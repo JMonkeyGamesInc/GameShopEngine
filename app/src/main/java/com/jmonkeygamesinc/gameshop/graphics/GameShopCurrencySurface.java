@@ -55,7 +55,7 @@ public class GameShopCurrencySurface {
 
         for (int i = 0; i < this.vInfinitesimals.length; i++){
 
-            this.vInfinitesimals[i] = new GameShopCurrencyLine(new Vector3f[]{currencyLines[0].infinitesimals[i], currencyLines[1].infinitesimals[i], currencyLines[2].infinitesimals[i], currencyLines[3].infinitesimals[i]}, 4);
+            this.vInfinitesimals[i] = new GameShopCurrencyLine(new Vector3f[]{currencyLines[0].infinitesimals[i], currencyLines[1].infinitesimals[i], currencyLines[2].infinitesimals[i], currencyLines[3].infinitesimals[i]}, 8);
 
         }
     }

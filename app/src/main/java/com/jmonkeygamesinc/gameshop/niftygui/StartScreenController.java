@@ -96,17 +96,18 @@ public class StartScreenController implements ScreenController {
         for (GameShopCurrencyMesh cm: CurrencyMeshSingleton.getInstance().cMeshes){
 
             listBox.addItem("[CurrencyMesh]:" + cm.name);
-
+            int i = 0;
             for (GameShopCurrencySurface cs: cm.gspSurfaces){
 
                 listBox.addItem("    " + "[CurrencySurface]:" + cs.name);
 
-                int i = 0;
+
+                int j = 0;
                 for (GameShopCurrencyLine cl: cs.currencyLines){
 
                     listBox.addItem("        " + "[CurrencyLine]:" + i);
 
-                    int j = 0;
+
                     for (Vector3f v: cl.points){
 
                         listBox.addItem("            " + "[Vector3f]:" + j);
@@ -117,6 +118,8 @@ public class StartScreenController implements ScreenController {
             }
 
         }
+
+       // listBox.getItems().
     }
 
     /**
@@ -125,12 +128,79 @@ public class StartScreenController implements ScreenController {
     @NiftyEventSubscriber(id="myListBox")
     public void onMyListBoxSelectionChanged(final String id, final ListBoxSelectionChangedEvent<String> event) {
         List<String> selection = event.getSelection();
-        for (String selectedItem : selection) {
+        List<Integer> index = event.getSelectionIndices();
+        ListBox<String> listbox = event.getListBox();
+        selectHierarchyItem(selection.get(0), index.get(0), listbox);
+       // for (String selectedItem : selection) {
             //System.out.println("listbox selection [" + selectedItem + "]");
             //setSelectorToName(selectedItem);
-            selector.selectedObjectName = selectedItem;
-        }
+           // selector.selectedObjectName = selectedItem;
+
+       // }
     }
+
+    public void selectHierarchyItem(String selection, int index, ListBox<String> listbox){
+
+
+        if (selection.contains("[CurrencyMesh]")){
+            selector.mode = "CURRENCYMESH";
+        } else {
+            selector.mode = "CURRENCYSURFACE";
+        }
+
+        int i = 0;
+        for (GameShopCurrencyMesh cm: CurrencyMeshSingleton.getInstance().cMeshes){
+
+            selector.selectedCM = cm;
+            //listBox.addItem("[CurrencyMesh]:" + cm.name);
+
+            for (GameShopCurrencySurface cs: cm.gspSurfaces){
+
+                selector.selectedCS = cs;
+                //listBox.addItem("    " + "[CurrencySurface]:" + cs.name);
+
+                //int i = 0;
+                int vec = 0;
+                for (GameShopCurrencyLine cl: cs.currencyLines){
+
+                    selector.selectedCL = cl;
+                    //listBox.addItem("        " + "[CurrencyLine]:" + i);
+
+                    //int j = 0;
+
+                    for (Vector3f v: cl.points){
+
+                        selector.selectedVector3f = v;
+                      //  listBox.addItem("            " + "[Vector3f]:" + j);
+                       // j++;
+                        vec++;
+                        i++;
+                        if (i == index){
+                            break;
+                        }
+                    }
+                    i++;
+                    if (i == index){
+                        break;
+                    }
+                   // i++;
+                }
+                i++;
+                if (i == index){
+                    break;
+                }
+            }
+            i++;
+            if (i == index){
+                break;
+            }
+        }
+
+        selector.clearSelection();
+        selector.clearMovers();
+        selector.makeSelection();
+        selector.selectFromHierarchy(Integer.parseInt(selection.split(":")[1]));
+     }
 
 //    public void setSelectorToName(String name){
 //

@@ -36,6 +36,8 @@ public class Selector {
 
     public GameShopCurrencyMesh selectedCM;
     public GameShopCurrencySurface selectedCS;
+    public GameShopCurrencyLine selectedCL;
+    public Vector3f selectedVector3f;
 
     public ArrayList<Geometry> selectors;
     public Geometry selectedSelector;
@@ -61,54 +63,56 @@ public class Selector {
         initKeys();
     }
 
-    public void selectObject(){
 
-        if (mode.equals("CURRENCYMESH")){
 
-            for (GameShopCurrencyMesh cm: CurrencyMeshSingleton.getInstance().cMeshes){
-                if (cm.name.equals(selectedObjectName)){
-
-                    selectedCM = cm;
-                }
-            }
-
-        } else if (mode.equals("CURRENCYSURFACE")){
-
-            for (GameShopCurrencyMesh cm: CurrencyMeshSingleton.getInstance().cMeshes){
-
-                for (GameShopCurrencySurface cs: cm.gspSurfaces){
-
-                    if (cs.name.equals(selectedObjectName)){
-
-                        selectedCM = cm;
-                        selectedCS = cs;
-
-                    }
-                }
-            }
-        } else if (mode.equals("CURRENCYLINE")){
-
-            for (GameShopCurrencyMesh cm: CurrencyMeshSingleton.getInstance().cMeshes){
-
-                for (GameShopCurrencySurface cs: cm.gspSurfaces){
-
-                    for (GameShopCurrencyLine cl: cs.currencyLines){
-
-//                        if (cl.name.equals(selectedObjectName)){
+//    public void selectObject(){
 //
-//                            selectedCM = cm;
-//                            selectedCS = cs;
+//        if (mode.equals("CURRENCYMESH")){
 //
-//                        }
-                    }
-
-                }
-            }
-        } else if (mode.equals("VECTOR3F")){
-
-        }
-
-    }
+//            for (GameShopCurrencyMesh cm: CurrencyMeshSingleton.getInstance().cMeshes){
+//                if (cm.name.equals(selectedObjectName)){
+//
+//                    selectedCM = cm;
+//                }
+//            }
+//
+//        } else if (mode.equals("CURRENCYSURFACE")){
+//
+//            for (GameShopCurrencyMesh cm: CurrencyMeshSingleton.getInstance().cMeshes){
+//
+//                for (GameShopCurrencySurface cs: cm.gspSurfaces){
+//
+//                    if (cs.name.equals(selectedObjectName)){
+//
+//                        selectedCM = cm;
+//                        selectedCS = cs;
+//
+//                    }
+//                }
+//            }
+//        } else if (mode.equals("CURRENCYLINE")){
+//
+//            for (GameShopCurrencyMesh cm: CurrencyMeshSingleton.getInstance().cMeshes){
+//
+//                for (GameShopCurrencySurface cs: cm.gspSurfaces){
+//
+//                    for (GameShopCurrencyLine cl: cs.currencyLines){
+//
+////                        if (cl.name.equals(selectedObjectName)){
+////
+////                            selectedCM = cm;
+////                            selectedCS = cs;
+////
+////                        }
+//                    }
+//
+//                }
+//            }
+//        } else if (mode.equals("VECTOR3F")){
+//
+//        }
+//
+//    }
     public void resetSelection(){
 
         for (Geometry g: selectors){
@@ -327,6 +331,78 @@ public class Selector {
 
     }
 
+    public void selectFromHierarchy(int index){
+
+        Material material = new Material(app.getAssetManager().loadAsset(new AssetKey<>("Common/MatDefs/Misc/Unshaded.j3md")));
+        material.setColor("Color", ColorRGBA.Blue);
+
+
+       int i = 0;
+
+        if (mode.equals("CURRENCYMESH")) {
+            for (GameShopCurrencyMesh cm : CurrencyMeshSingleton.getInstance().cMeshes) {
+
+                if (cm.equals(selectedCM)){
+
+                    selectors.get(index).setMaterial(material);
+                    selectedSelector = selectors.get(index);
+                    enableMove();
+                    System.out.println("SELECTED " + index);
+                    break;
+                }
+
+                i++;
+            }
+        } else {
+
+            for (GameShopCurrencyMesh cm : CurrencyMeshSingleton.getInstance().cMeshes) {
+
+                for (GameShopCurrencySurface cs: cm.gspSurfaces){
+
+
+
+                    int clCount = 0;
+                    boolean found = false;
+
+                    for (GameShopCurrencyLine cl: cs.currencyLines){
+                        int j = 0;
+                        for (Vector3f v: cl.points){
+
+//                            if (j > 3){
+//                                j = 0;
+//                            }
+                            if (selectedVector3f.equals(v)){
+                                selectors.get(index).setMaterial(material);
+                                selectedSelector = selectors.get(index);
+                                enableMove();
+                                System.out.println("SELECTED " + (index));
+                                found = true;
+                                break;
+                            }
+                           j++;
+                        }
+                        if (found){
+                            break;
+                        }
+                        clCount++;
+                    }
+                }
+//                if (cm.equals(selectedCM)){
+//
+//                    selectors.get(i).setMaterial(material);
+//                    selectedSelector = selectors.get(i);
+//                    enableMove();
+//                    System.out.println("SELECTED " + i);
+//                    break;
+//                }
+//
+//                i++;
+            }
+        }
+
+
+    }
+
     //public void
     /** Declaring the "Shoot" action and mapping to its triggers. */
     private void initKeys() {
@@ -351,7 +427,7 @@ public class Selector {
 
                     app.getRootNode().collideWith(ray, results);
 
-                    if (action.equals("SELECT")){
+                   // if (action.equals("SELECT")){
 
                         // 4. Print the results
                         System.out.println("----- Collisions? " + results.size() + "-----");
@@ -366,16 +442,16 @@ public class Selector {
 
                         }
 
-                        if (count == 0){
-
-                            resetSelection();
-                            clearMovers();
-
-                            if (mode.equals("NONE")) {
-                                selectedCM = null;
-                            }
-
-                        }
+//                        if (count == 0){
+//
+//                            resetSelection();
+//                            clearMovers();
+//
+//                            if (mode.equals("NONE")) {
+//                                selectedCM = null;
+//                            }
+//
+//                        }
 
                         for (int i = 0; i < results.size(); i++) {
                             String hit = results.getCollision(i).getGeometry().getName();
@@ -391,7 +467,7 @@ public class Selector {
                                 System.out.println("  You shot " + hit + " at " + pt + ", " + dist + " wu away.");
 
                                 if (mode.equals("NONE")) {
-                                    selectedCM = CurrencyMeshSingleton.getInstance().cMeshes.get(Integer.parseInt(hit.split(" ")[1]));
+                                    //selectedCM = CurrencyMeshSingleton.getInstance().cMeshes.get(Integer.parseInt(hit.split(" ")[1]));
 
                                     Material material = new Material(app.getAssetManager().loadAsset(new AssetKey<>("Common/MatDefs/Misc/Unshaded.j3md")));
                                     material.setColor("Color", ColorRGBA.Blue);
@@ -399,6 +475,12 @@ public class Selector {
                                     selectors.get(Integer.parseInt(hit.split(" ")[1])).setMaterial(material);
                                     selectedSelector = selectors.get(Integer.parseInt(hit.split(" ")[1]));
                                 } else if (mode.equals("CURRENCYMESH")){
+
+                                    Material material = new Material(app.getAssetManager().loadAsset(new AssetKey<>("Common/MatDefs/Misc/Unshaded.j3md")));
+                                    material.setColor("Color", ColorRGBA.Blue);
+
+                                    selectors.get(Integer.parseInt(hit.split(" ")[1])).setMaterial(material);
+                                    selectedSelector = selectors.get(Integer.parseInt(hit.split(" ")[1]));
 
 
                                 } else if (mode.equals("CURRENCYSURFACE")){
@@ -418,7 +500,7 @@ public class Selector {
                             }
                             break;
                         }
-                    }
+                   // }
 
                     if (action.equals("MOVE")){
 

@@ -18,7 +18,7 @@
 
                     <panel id="panel_hierarchy" height="90%" width="100%" align="center" valign="center" childLayout="vertical">
                         <!-- using XML -->
-                        <control id="myListBox" name="listBox" vertical="on" horizontal="on" displayItems="15" selection="Multiple" />
+                        <control id="myListBox" name="listBox" vertical="on" horizontal="on" displayItems="15" selection="Single" />
 
                     </panel>
 <!--                    <panel id="panel_save" backgroundColor="#f60f" height="10%" width="100%" align="center" valign="center" childLayout="vertical">-->

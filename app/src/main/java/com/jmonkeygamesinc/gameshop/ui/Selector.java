@@ -61,6 +61,11 @@ public class Selector {
         selectors = new ArrayList<>();
         movers = new ArrayList<>();
 
+
+        selectedCM = CurrencyMeshSingleton.getInstance().cMeshes.get(0);
+        selectedCS = CurrencyMeshSingleton.getInstance().cMeshes.get(0).gspSurfaces[0];
+        selectedCL = CurrencyMeshSingleton.getInstance().cMeshes.get(0).gspSurfaces[0].currencyLines[0];
+        selectedVector3f = CurrencyMeshSingleton.getInstance().cMeshes.get(0).gspSurfaces[0].currencyLines[0].points[0];
         makeSelection();
 
         initKeys();
@@ -193,6 +198,7 @@ public class Selector {
                     material.setColor("Color", ColorRGBA.Orange);
                     geom.setMaterial(material);
                     geom.setLocalTranslation(cm.gspSurfaces[0].vInfinitesimals[cm.gspSurfaces[0].vInfinitesimals.length / 2].infinitesimals[cm.gspSurfaces[0].vInfinitesimals[cm.gspSurfaces[0].vInfinitesimals.length / 2].infinitesimals.length / 2]);
+
                     app.getRootNode().attachChild(geom);
                     selectors.add(geom);
                     i++;
@@ -218,6 +224,7 @@ public class Selector {
                             material.setColor("Color", ColorRGBA.Orange);
                             geom.setMaterial(material);
                             geom.setLocalTranslation(v);
+
                             app.getRootNode().attachChild(geom);
                             selectors.add(geom);
                             i++;
@@ -406,6 +413,7 @@ public class Selector {
 
     }
 
+
     //public void
     /** Declaring the "Shoot" action and mapping to its triggers. */
     private void initKeys() {
@@ -499,6 +507,7 @@ public class Selector {
 
                                     lastPosition = new Vector2f(event.getX(), event.getX());
 
+
                                 } else if (mode.equals("VECTOR3")){
 
 
@@ -547,6 +556,24 @@ public class Selector {
                                 selectors.get(Integer.parseInt(hit.split(" ")[1])).setMaterial(material);
                                 selectedSelector = selectors.get(Integer.parseInt(hit.split(" ")[1]));
 
+                                //int i1 = 0;
+                                for (GameShopCurrencyLine cl: selectedCS.currencyLines){
+                                    for (Vector3f v: cl.points){
+
+//                                        if (i1 == Integer.parseInt(hit.split(" ")[1])){
+//                                            selectedVector3f = v;
+//                                            break;
+//                                        }
+//                                        i1++;
+
+                                        if (v.distance(selectedSelector.getWorldTranslation()) < .25f){
+                                            selectedVector3f = v;
+                                            //break;
+                                        }
+                                    }
+                                }
+
+
 
                             } else if (mode.equals("VECTOR3")){
 
@@ -579,7 +606,7 @@ public class Selector {
                     for (int i = 0; i < 6; i++){
 
 
-                        if (selectedMover.equals(selectors.get(i))){
+                        if (selectedMover.equals(movers.get(i))){
 
                             if (currentPosition.distance(lastPosition) > 0f){
 
@@ -624,18 +651,19 @@ public class Selector {
 
                                     if (currentPosition.x - lastPosition.x > 0){
 
-                                        moveSelectorAndVector(new Vector3f(.1f, 0, 0));
+                                        moveSelectorAndVector(new Vector3f(0, 0, .1f));
                                     }  else {
-                                        moveSelectorAndVector(new Vector3f(-.1f, 0, 0));
+                                        moveSelectorAndVector(new Vector3f(0, 0, -.1f));
 
                                     }
                                 } else if (i == 5){
 
                                     if (currentPosition.x - lastPosition.x > 0){
 
-                                        moveSelectorAndVector(new Vector3f(.1f, 0, 0));
+
+                                        moveSelectorAndVector(new Vector3f(0, 0, .1f));
                                     }  else {
-                                        moveSelectorAndVector(new Vector3f(-.1f, 0, 0));
+                                        moveSelectorAndVector(new Vector3f(0,0, -.1f));
 
                                     }
                                 }
@@ -669,68 +697,82 @@ public class Selector {
         }
     };
 
-    public void moveSelectorAndVector(Vector3f distance){
+    public void moveSelectorAndVector(Vector3f distance) {
 
-        boolean found = false;
+        if (selectedSelector != null) {
+            boolean found = false;
 
-        int lastI = 0;
-        int lastJ = 0;
-        int lastK = 0;
-        int lastL = 0;
+            int lastI = 0;
+            int lastJ = 0;
+            int lastK = 0;
+            int lastL = 0;
 
-        int l = 0;
-        for (GameShopCurrencyMesh cm: CurrencyMeshSingleton.getInstance().cMeshes) {
-            if (selectedCM.equals(cm)){
-                int k = 0;
-                for (GameShopCurrencySurface cs: cm.gspSurfaces){
-                    if (selectedCS.equals(cs)){
-                        int j = 0;
-                        for (GameShopCurrencyLine cl: cs.currencyLines){
-                            if (selectedCL.equals(cl)){
+            int l = 0;
+            for (GameShopCurrencyMesh cm : CurrencyMeshSingleton.getInstance().cMeshes) {
+                if (selectedCM.equals(cm)) {
+                    int k = 0;
+                    for (GameShopCurrencySurface cs : cm.gspSurfaces) {
+                        if (selectedCS.equals(cs)) {
+                            int j = 0;
+                            for (GameShopCurrencyLine cl : cs.currencyLines) {
+                                if (selectedCL.equals(cl)) {
 
-                                int i = 0;
-                                for (Vector3f v: cl.points){
-                                    if (selectedVector3f.equals(v)){
-                                       // cl.points[i] = new Vector3f(v.add(distance));
-                                        found = true;
+                                    int i = 0;
+                                    for (Vector3f v : cl.points) {
+                                        if (selectedVector3f.equals(v)) {
+                                            // cl.points[i] = new Vector3f(v.add(distance));
+                                            found = true;
+                                        }
+
+                                        if (found) {
+                                            lastI = i;
+                                            break;
+                                        }
+                                        i++;
                                     }
-                                    i++;
-                                    if (found){
-                                        lastI = i;
-                                        break;
-                                    }
+
                                 }
 
-                            }
-                            j++;
-                            if (found){
-                                lastJ = j;
-                                break;
+                                if (found) {
+                                    lastJ = j;
+                                    break;
+                                }
+                                j++;
                             }
                         }
-                    }
-                    k++;
-                    if (found){
-                        lastK = k;
-                        break;
+
+                        if (found) {
+                            lastK = k;
+                            break;
+                        }
+                        k++;
                     }
                 }
-            }
-            l++;
-            if (found){
-                lastL = l;
-                break;
-            }
-        }
 
-        CurrencyMeshSingleton.getInstance().cMeshes.get(lastL).gspSurfaces[lastK].currencyLines[lastJ].points[lastI] = new Vector3f(selectedVector3f.add(distance));
-        CurrencyMeshSingleton.getInstance().cMeshes.get(lastL).node.detachAllChildren();
-        CurrencyMeshSingleton.getInstance().cMeshes.get(lastL).initShapes();
+                if (found) {
+                    lastL = l;
+                    break;
+                }
+                l++;
+            }
 
-        for (Geometry g: movers){
-            g.move(distance);
+            for (Geometry g : movers) {
+                g.move(distance);
+            }
+            selectedSelector.move(distance);
+
+            selectedVector3f = new Vector3f(selectedVector3f.add(distance));
+            CurrencyMeshSingleton.getInstance().cMeshes.get(lastL).gspSurfaces[lastK].currencyLines[lastJ].moveCurrency(lastI, selectedVector3f);
+            System.out.println("LINE: " + CurrencyMeshSingleton.getInstance().cMeshes.get(lastL).gspSurfaces[lastK].currencyLines[lastJ].points[lastI]);
+//        System.out.println("LINE: " +         CurrencyMeshSingleton.getInstance().cMeshes.get(lastL).gspSurfaces[lastK].currencyLines[lastJ].points[lastI]);
+            CurrencyMeshSingleton.getInstance().cMeshes.get(lastL).gspSurfaces[lastK].updateVerticalLines();
+
+//        CurrencyMeshSingleton.getInstance().cMeshes.get(lastL).node.detachAllChildren();
+//        app.getRootNode().detachChild(CurrencyMeshSingleton.getInstance().cMeshes.get(lastL).node);
+             CurrencyMeshSingleton.getInstance().cMeshes.get(lastL).allocateVertices();
+            CurrencyMeshSingleton.getInstance().cMeshes.get(lastL).updateShapes();
+
+
         }
-        selectedSelector.move(distance);
     }
-
 }

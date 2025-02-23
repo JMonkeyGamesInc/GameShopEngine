@@ -44,6 +44,9 @@ public class GameShopCurrencyMesh {
     public SimpleApplication app;
 
     public String name;
+
+    public Mesh m;
+    Geometry geom;
     public GameShopCurrencyMesh(SimpleApplication app, String name, Node node, GameShopCurrencySurface[] gspSurfaces, GameShopATMS atms){
 
         this.name = name;
@@ -56,6 +59,8 @@ public class GameShopCurrencyMesh {
         this.atms = atms;
 
         this.surfacePeek = new int[gspSurfaces.length];
+
+        this.m = new Mesh();
 
         //this.textureSlices = new Vector4f[textureSlices.length];
         //this.textureSlices = textureSlices;
@@ -80,6 +85,8 @@ public class GameShopCurrencyMesh {
 //          
 //      };
     }
+
+
 
 
     public void allocateVertices(){
@@ -463,13 +470,18 @@ public class GameShopCurrencyMesh {
 
     public void updateShapes(){
 
+        m.setBuffer(Type.Position, 3, BufferUtils.createFloatBuffer(vertices));
+        m.setBuffer(Type.TexCoord, 2, BufferUtils.createFloatBuffer(texCoord));
+        m.setBuffer(Type.Index, 1, BufferUtils.createIntBuffer(indices));
+        m.updateBound();
+       // geom.updateModelBound();
         //node.c
         //node.getChild(0).
     }
     public void initShapes(){
 
 
-        Mesh m = new Mesh();
+
 
         // Vertex positions in space
 //        Vector3f[] vertices = new Vector3f[4];
@@ -489,17 +501,14 @@ public class GameShopCurrencyMesh {
 //        short[] indexes = {2, 0, 1, 1, 3, 2};
 
         // Setting buffers
-        m.setBuffer(Type.Position, 3, BufferUtils.createFloatBuffer(vertices));
-        m.setBuffer(Type.TexCoord, 2, BufferUtils.createFloatBuffer(texCoord));
-        m.setBuffer(Type.Index, 1, BufferUtils.createIntBuffer(indices));
-        m.updateBound();
+        updateShapes();
 
         // *************************************************************************
         // First mesh uses one solid color
         // *************************************************************************
 
         // Creating a geometry, and apply a single color material to it
-        Geometry geom = new Geometry("OurMesh", m);
+          geom = new Geometry("OurMesh", m);
         Material mat = new Material(app.getAssetManager(), "Common/MatDefs/Misc/Unshaded.j3md");
 
         Texture2D texture = new Texture2D(this.atms.makeATMS());

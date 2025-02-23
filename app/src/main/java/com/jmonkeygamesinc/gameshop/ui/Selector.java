@@ -566,7 +566,7 @@ public class Selector {
 //                                        }
 //                                        i1++;
 
-                                        if (v.distance(selectedSelector.getWorldTranslation()) < .25f){
+                                        if (v.distance(selectedSelector.getWorldTranslation()) < .15f){
                                             selectedVector3f = v;
                                             //break;
                                         }
@@ -719,7 +719,7 @@ public class Selector {
 
                                     int i = 0;
                                     for (Vector3f v : cl.points) {
-                                        if (selectedVector3f.equals(v)) {
+                                        if (selectedVector3f.distance(v) < 0.1f) {
                                             // cl.points[i] = new Vector3f(v.add(distance));
                                             found = true;
                                         }

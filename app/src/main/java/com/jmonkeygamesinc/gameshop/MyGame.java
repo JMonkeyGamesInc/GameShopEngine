@@ -56,6 +56,7 @@ public final class MyGame extends SimpleApplication {
         flyCam.setEnabled(false);
 
 
+        viewPort.setBackgroundColor(ColorRGBA.White);
 
         //for i shapes draw
 //        final Sphere mySphere = new Sphere(10, 50, 50);

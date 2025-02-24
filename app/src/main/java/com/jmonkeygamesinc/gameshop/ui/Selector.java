@@ -2,15 +2,8 @@ package com.jmonkeygamesinc.gameshop.ui;
 
 import com.jme3.app.SimpleApplication;
 import com.jme3.asset.AssetKey;
-import com.jme3.collision.CollisionResult;
 import com.jme3.collision.CollisionResults;
-import com.jme3.input.KeyInput;
-import com.jme3.input.MouseInput;
 import com.jme3.input.TouchInput;
-import com.jme3.input.controls.ActionListener;
-import com.jme3.input.controls.AnalogListener;
-import com.jme3.input.controls.KeyTrigger;
-import com.jme3.input.controls.MouseButtonTrigger;
 import com.jme3.input.controls.TouchListener;
 import com.jme3.input.controls.TouchTrigger;
 import com.jme3.input.event.TouchEvent;
@@ -20,14 +13,14 @@ import com.jme3.math.Ray;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
-import com.jme3.scene.Node;
 import com.jme3.scene.shape.Box;
-import com.jmonkeygamesinc.gameshop.global.CurrencyMeshSingleton;
+import com.jmonkeygamesinc.gameshop.global.GameShopCurrencyMeshHash;
 import com.jmonkeygamesinc.gameshop.graphics.GameShopCurrencyLine;
 import com.jmonkeygamesinc.gameshop.graphics.GameShopCurrencyMesh;
 import com.jmonkeygamesinc.gameshop.graphics.GameShopCurrencySurface;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  *
@@ -38,8 +31,9 @@ public class Selector {
     public GameShopCurrencyMesh selectedCM;
     public GameShopCurrencySurface selectedCS;
     public GameShopCurrencyLine selectedCL;
-    public Vector3f selectedVector3f;
+    //public Vector3f selectedVector3f;
 
+    public int selectedVec;
     public ArrayList<Geometry> selectors;
     public Geometry selectedSelector;
 
@@ -62,10 +56,11 @@ public class Selector {
         movers = new ArrayList<>();
 
 
-        selectedCM = CurrencyMeshSingleton.getInstance().cMeshes.get(0);
-        selectedCS = CurrencyMeshSingleton.getInstance().cMeshes.get(0).gspSurfaces[0];
-        selectedCL = CurrencyMeshSingleton.getInstance().cMeshes.get(0).gspSurfaces[0].currencyLines[0];
-        selectedVector3f = CurrencyMeshSingleton.getInstance().cMeshes.get(0).gspSurfaces[0].currencyLines[0].points[0];
+        selectedCM = GameShopCurrencyMeshHash.getInstance().cMeshes.get("Main");
+        selectedCS = Objects.requireNonNull(GameShopCurrencyMeshHash.getInstance().cMeshes.get("Main")).gspSurfaces[0];
+        selectedCL = Objects.requireNonNull(GameShopCurrencyMeshHash.getInstance().cMeshes.get("Main")).gspSurfaces[0].currencyLines[0];
+        //selectedVector3f = GameShopCurrencyMeshHash.getInstance().cMeshes.get("Main").gspSurfaces[0].currencyLines[0].points[0];
+        selectedVec = 0;
         makeSelection();
 
         initKeys();
@@ -174,7 +169,7 @@ public class Selector {
         if (mode.equals("NONE")) {
 
             int i = 0;
-            for (GameShopCurrencyMesh cm : CurrencyMeshSingleton.getInstance().cMeshes) {
+            for (GameShopCurrencyMesh cm : GameShopCurrencyMeshHash.getInstance().cMeshes.values()) {
 
                 Box box = new Box(.5f, .5f, .5f);
                 Geometry geom = new Geometry("SelectBox " + i, box);
@@ -189,7 +184,7 @@ public class Selector {
         } else if (mode.equals("CURRENCYMESH")){
 
             int i = 0;
-            for (GameShopCurrencyMesh cm : CurrencyMeshSingleton.getInstance().cMeshes) {
+            for (GameShopCurrencyMesh cm : GameShopCurrencyMeshHash.getInstance().cMeshes.values()) {
 
                 for (GameShopCurrencySurface cs: cm.gspSurfaces) {
                     Box box = new Box(.5f, .5f, .5f);
@@ -211,7 +206,7 @@ public class Selector {
         } else if (mode.equals("CURRENCYSURFACE")){
 
             int i = 0;
-            for (GameShopCurrencyMesh cm : CurrencyMeshSingleton.getInstance().cMeshes) {
+            for (GameShopCurrencyMesh cm : GameShopCurrencyMeshHash.getInstance().cMeshes.values()) {
 
                 for (GameShopCurrencySurface cs: cm.gspSurfaces) {
 
@@ -350,7 +345,7 @@ public class Selector {
        int i = 0;
 
         if (mode.equals("CURRENCYMESH")) {
-            for (GameShopCurrencyMesh cm : CurrencyMeshSingleton.getInstance().cMeshes) {
+            for (GameShopCurrencyMesh cm : GameShopCurrencyMeshHash.getInstance().cMeshes.values()) {
 
                 if (cm.equals(selectedCM)){
 
@@ -365,7 +360,7 @@ public class Selector {
             }
         } else {
 
-            for (GameShopCurrencyMesh cm : CurrencyMeshSingleton.getInstance().cMeshes) {
+            for (GameShopCurrencyMesh cm : GameShopCurrencyMeshHash.getInstance().cMeshes.values()) {
 
                 for (GameShopCurrencySurface cs: cm.gspSurfaces){
 
@@ -381,7 +376,8 @@ public class Selector {
 //                            if (j > 3){
 //                                j = 0;
 //                            }
-                            if (selectedVector3f.equals(v)){
+                            if(selectedVec == (clCount * 4) + j){
+                            //if (selectedVector3f.equals(v)){
                                 selectors.get(index).setMaterial(material);
                                 selectedSelector = selectors.get(index);
                                 enableMove();
@@ -556,22 +552,23 @@ public class Selector {
                                 selectors.get(Integer.parseInt(hit.split(" ")[1])).setMaterial(material);
                                 selectedSelector = selectors.get(Integer.parseInt(hit.split(" ")[1]));
 
+                                selectedVec = Integer.parseInt(hit.split(" ")[1]);
                                 //int i1 = 0;
-                                for (GameShopCurrencyLine cl: selectedCS.currencyLines){
-                                    for (Vector3f v: cl.points){
-
-//                                        if (i1 == Integer.parseInt(hit.split(" ")[1])){
+//                                for (GameShopCurrencyLine cl: selectedCS.currencyLines){
+//                                    for (Vector3f v: cl.points){
+//
+////                                        if (i1 == Integer.parseInt(hit.split(" ")[1])){
+////                                            selectedVector3f = v;
+////                                            break;
+////                                        }
+////                                        i1++;
+//
+//                                        if (v.distance(selectedSelector.getWorldTranslation()) < .15f){
 //                                            selectedVector3f = v;
-//                                            break;
+//                                            //break;
 //                                        }
-//                                        i1++;
-
-                                        if (v.distance(selectedSelector.getWorldTranslation()) < .15f){
-                                            selectedVector3f = v;
-                                            //break;
-                                        }
-                                    }
-                                }
+//                                    }
+//                                }
 
 
 
@@ -705,21 +702,21 @@ public class Selector {
             int lastI = 0;
             int lastJ = 0;
             int lastK = 0;
-            int lastL = 0;
+            String lastL = "";
 
             int l = 0;
-            for (GameShopCurrencyMesh cm : CurrencyMeshSingleton.getInstance().cMeshes) {
-                if (selectedCM.equals(cm)) {
+            for (String cm : GameShopCurrencyMeshHash.getInstance().cMeshes.keySet()) {
+                if (selectedCM.equals(GameShopCurrencyMeshHash.getInstance().cMeshes.get(cm))) {
                     int k = 0;
-                    for (GameShopCurrencySurface cs : cm.gspSurfaces) {
+                    for (GameShopCurrencySurface cs : Objects.requireNonNull(GameShopCurrencyMeshHash.getInstance().cMeshes.get(cm)).gspSurfaces) {
                         if (selectedCS.equals(cs)) {
                             int j = 0;
                             for (GameShopCurrencyLine cl : cs.currencyLines) {
-                                if (selectedCL.equals(cl)) {
+                               // if (selectedCL.equals(cl)) {
 
                                     int i = 0;
                                     for (Vector3f v : cl.points) {
-                                        if (selectedVector3f.distance(v) < 0.1f) {
+                                        if (selectedVec == (j * 4) + i) {
                                             // cl.points[i] = new Vector3f(v.add(distance));
                                             found = true;
                                         }
@@ -731,7 +728,7 @@ public class Selector {
                                         i++;
                                     }
 
-                                }
+                               // }
 
                                 if (found) {
                                     lastJ = j;
@@ -750,7 +747,7 @@ public class Selector {
                 }
 
                 if (found) {
-                    lastL = l;
+                    lastL = cm;
                     break;
                 }
                 l++;
@@ -761,16 +758,16 @@ public class Selector {
             }
             selectedSelector.move(distance);
 
-            selectedVector3f = new Vector3f(selectedVector3f.add(distance));
-            CurrencyMeshSingleton.getInstance().cMeshes.get(lastL).gspSurfaces[lastK].currencyLines[lastJ].moveCurrency(lastI, selectedVector3f);
-            System.out.println("LINE: " + CurrencyMeshSingleton.getInstance().cMeshes.get(lastL).gspSurfaces[lastK].currencyLines[lastJ].points[lastI]);
+            //selectedVector3f = new Vector3f(selectedVector3f.add(distance));
+            Objects.requireNonNull(GameShopCurrencyMeshHash.getInstance().cMeshes.get(lastL)).gspSurfaces[lastK].currencyLines[lastJ].moveCurrency(lastI,             Objects.requireNonNull(GameShopCurrencyMeshHash.getInstance().cMeshes.get(lastL)).gspSurfaces[lastK].currencyLines[lastJ].points[lastI].add(distance));
+            System.out.println("LINE: " + Objects.requireNonNull(GameShopCurrencyMeshHash.getInstance().cMeshes.get(lastL)).gspSurfaces[lastK].currencyLines[lastJ].points[lastI]);
 //        System.out.println("LINE: " +         CurrencyMeshSingleton.getInstance().cMeshes.get(lastL).gspSurfaces[lastK].currencyLines[lastJ].points[lastI]);
-            CurrencyMeshSingleton.getInstance().cMeshes.get(lastL).gspSurfaces[lastK].updateVerticalLines();
+            Objects.requireNonNull(GameShopCurrencyMeshHash.getInstance().cMeshes.get(lastL)).gspSurfaces[lastK].updateVerticalLines();
 
 //        CurrencyMeshSingleton.getInstance().cMeshes.get(lastL).node.detachAllChildren();
 //        app.getRootNode().detachChild(CurrencyMeshSingleton.getInstance().cMeshes.get(lastL).node);
-             CurrencyMeshSingleton.getInstance().cMeshes.get(lastL).allocateVertices();
-            CurrencyMeshSingleton.getInstance().cMeshes.get(lastL).updateShapes();
+             Objects.requireNonNull(GameShopCurrencyMeshHash.getInstance().cMeshes.get(lastL)).allocateVertices();
+            Objects.requireNonNull(GameShopCurrencyMeshHash.getInstance().cMeshes.get(lastL)).updateShapes();
 
 
         }

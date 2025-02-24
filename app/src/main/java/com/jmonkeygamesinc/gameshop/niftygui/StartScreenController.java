@@ -1,10 +1,8 @@
 package com.jmonkeygamesinc.gameshop.niftygui;
 
-import androidx.annotation.NonNull;
-
 import com.jme3.app.Application;
 import com.jme3.math.Vector3f;
-import com.jmonkeygamesinc.gameshop.global.CurrencyMeshSingleton;
+import com.jmonkeygamesinc.gameshop.global.GameShopCurrencyMeshHash;
 import com.jmonkeygamesinc.gameshop.graphics.GameShopCurrencyLine;
 import com.jmonkeygamesinc.gameshop.graphics.GameShopCurrencyMesh;
 import com.jmonkeygamesinc.gameshop.graphics.GameShopCurrencySurface;
@@ -15,15 +13,10 @@ import java.util.Objects;
 
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
-import de.lessvoid.nifty.builder.ElementBuilder;
-import de.lessvoid.nifty.builder.TextBuilder;
 import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.controls.ListBoxSelectionChangedEvent;
-import de.lessvoid.nifty.controls.listbox.ListBoxControl;
-import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
-import de.lessvoid.nifty.tools.Color;
 
 /**
  * A ScreenController for the "start" screen defined in
@@ -93,11 +86,12 @@ public class StartScreenController implements ScreenController {
 //        listBox.addItem("b");
 //        listBox.addItem("c");
 
-        for (GameShopCurrencyMesh cm: CurrencyMeshSingleton.getInstance().cMeshes){
+        for (String cm: GameShopCurrencyMeshHash.getInstance().cMeshes.keySet()){
 
-            listBox.addItem("[CurrencyMesh]:" + cm.name);
+            //assert listBox != null;
+            listBox.addItem("[CurrencyMesh]:" + cm);
             int i = 0;
-            for (GameShopCurrencySurface cs: cm.gspSurfaces){
+            for (GameShopCurrencySurface cs: Objects.requireNonNull(GameShopCurrencyMeshHash.getInstance().cMeshes.get(cm)).gspSurfaces){
 
                 listBox.addItem("    " + "[CurrencySurface]:" + cs.name);
 
@@ -149,7 +143,7 @@ public class StartScreenController implements ScreenController {
         }
 
         int i = 0;
-        for (GameShopCurrencyMesh cm: CurrencyMeshSingleton.getInstance().cMeshes){
+        for (GameShopCurrencyMesh cm: GameShopCurrencyMeshHash.getInstance().cMeshes.values()){
 
             selector.selectedCM = cm;
             //listBox.addItem("[CurrencyMesh]:" + cm.name);
@@ -170,7 +164,7 @@ public class StartScreenController implements ScreenController {
 
                     for (Vector3f v: cl.points){
 
-                        selector.selectedVector3f = v;
+                        selector.selectedVec = vec;
                       //  listBox.addItem("            " + "[Vector3f]:" + j);
                        // j++;
                         vec++;

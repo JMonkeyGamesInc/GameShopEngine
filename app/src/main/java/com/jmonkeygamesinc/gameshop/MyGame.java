@@ -10,7 +10,7 @@ import com.jme3.math.Vector3f;
 import com.jme3.math.Vector4f;
 import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.scene.Node;
-import com.jmonkeygamesinc.gameshop.global.CurrencyMeshSingleton;
+import com.jmonkeygamesinc.gameshop.global.GameShopCurrencyMeshHash;
 import com.jmonkeygamesinc.gameshop.graphics.GameShopATMS;
 import com.jmonkeygamesinc.gameshop.graphics.GameShopCurrencyLine;
 import com.jmonkeygamesinc.gameshop.graphics.GameShopCurrencyMesh;
@@ -82,10 +82,10 @@ public final class MyGame extends SimpleApplication {
 
         GameShopCurrencySurface cs = new GameShopCurrencySurface("0", cl);
 
-        GameShopCurrencyMesh cm = new GameShopCurrencyMesh(this, "0", new Node("SquareCircle"), new GameShopCurrencySurface[]{cs}, atms);
+        GameShopCurrencyMesh cm = new GameShopCurrencyMesh(this, new Node("SquareCircle"), new GameShopCurrencySurface[]{cs}, atms);
         cm.initShapes();
 
-        CurrencyMeshSingleton.getInstance().cMeshes.add(cm);
+        GameShopCurrencyMeshHash.getInstance().cMeshes.put("Main", cm);
 
         Selector selector = new Selector(this);
 

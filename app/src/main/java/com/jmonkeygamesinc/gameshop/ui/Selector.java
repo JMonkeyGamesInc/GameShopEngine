@@ -448,15 +448,15 @@ public class Selector {
                             }
 
                         }
-
+//
 //                        if (count == 0){
 //
 //                            resetSelection();
 //                            clearMovers();
 //
-//                            if (mode.equals("NONE")) {
-//                                selectedCM = null;
-//                            }
+////                            if (mode.equals("NONE")) {
+////                                selectedCM = null;
+////                            }
 //
 //                        }
 
@@ -628,7 +628,7 @@ public class Selector {
                                     }
                                 } else if (i == 2){
 
-                                    if (currentPosition.y - lastPosition.y > 0){
+                                    if (currentPosition.x - lastPosition.x > 0){
 
                                         moveSelectorAndVector(new Vector3f(0, .1f, 0));
                                     }  else {
@@ -637,7 +637,7 @@ public class Selector {
                                     }
                                 } else if (i == 3){
 
-                                    if (currentPosition.y - lastPosition.y > 0){
+                                    if (currentPosition.x - lastPosition.x > 0){
 
                                         moveSelectorAndVector(new Vector3f(0, .1f, 0));
                                     }  else {

@@ -31,6 +31,23 @@
                     <panel id="panel_selected_object_text" backgroundColor="#ffff" height="10%" width="100%" childLayout="horizontal">
                         <text id="text_selected_object" font="aurulent-sans-16.fnt" color="#000f" text="Selected Object" />
                     </panel>
+                    <panel id="panel_initial_position" backgroundColor="#aaaf" height="10%" width="100%" childLayout="horizontal">
+                        <text id="text_initial_position_x" font="aurulent-sans-16.fnt" color="#000f" text="X: " />
+                        <text id="text_initial_position_y" font="aurulent-sans-16.fnt" color="#000f" text="Y: " />
+                        <text id="text_initial_position_z" font="aurulent-sans-16.fnt" color="#000f" text="Z: " />
+                    </panel>
+
+                    <panel id="panel_current_position" backgroundColor="#aaaf" height="60%" width="100%" childLayout="vertical">
+                        <text id="text_current_position_x" font="aurulent-sans-16.fnt" color="#000f" text="X: " />
+                        <control id="input_current_position_x" name="textfield" maxLength="20"  />
+                        <text id="text_current_position_y" font="aurulent-sans-16.fnt" color="#000f" text="Y: " />
+                        <control id="input_current_position_y" name="textfield" maxLength="20"  />
+                        <text id="text_current_position_z" font="aurulent-sans-16.fnt" color="#000f" text="Z: " />
+                        <control id="input_current_position_z" name="textfield" maxLength="20"  />
+                        <control id="button_update" name ="button" label="Update" />
+                    </panel>
+
+
                 </panel>
 
 

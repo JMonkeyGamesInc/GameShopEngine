@@ -15,6 +15,8 @@ import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.controls.ListBoxSelectionChangedEvent;
+import de.lessvoid.nifty.controls.TextField;
+import de.lessvoid.nifty.controls.TextFieldChangedEvent;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 
@@ -116,6 +118,19 @@ public class StartScreenController implements ScreenController {
        // listBox.getItems().
     }
 
+    public void updatePositionLabels(){
+
+        if (selector.mode.equals("CURRENCYSURFACE")){
+
+           // screen.s("text_current_position_x").
+        }
+    }
+//    @NiftyEventSubscriber(id="inputX")
+//    public void onTextfieldChange(final String id, final TextFieldChangedEvent event){
+//
+//        System.out.println(event.getText());
+////        System.out.println(Objects.requireNonNull(screen.findNiftyControl("input_current_position_x", TextField.class)).getDisplayedText());
+//    }
     /**
      * When the selection of the ListBox changes this method is called.
      */

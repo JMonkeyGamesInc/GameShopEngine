@@ -76,7 +76,7 @@ public final class MyGame extends SimpleApplication {
 
         for (int i = 0; i < 4; i++){
 
-            cl[i] = new GameShopCurrencyLine(new Vector3f[]{ new Vector3f(0,i, 0), new Vector3f(1,i, 0), new Vector3f(2,i, 0), new Vector3f(3,i, 0)}, 4);
+            cl[i] = new GameShopCurrencyLine(new Vector3f[]{ new Vector3f(0,i, 0), new Vector3f(1,i, 0), new Vector3f(2,i, 0), new Vector3f(3,i, 0)}, 8);
 
         }
 

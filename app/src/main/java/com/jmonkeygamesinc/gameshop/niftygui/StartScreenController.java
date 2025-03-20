@@ -152,7 +152,7 @@ public class StartScreenController implements ScreenController {
 
 
         if (selection.contains("[CurrencyMesh]")){
-            selector.mode = "CURRENCYMESH";
+            //selector.mode = "CURRENCYMESH";
         } else {
             selector.mode = "CURRENCYSURFACE";
         }
@@ -205,10 +205,12 @@ public class StartScreenController implements ScreenController {
             }
         }
 
-        selector.clearSelection();
-        selector.clearMovers();
-        selector.makeSelection();
-        selector.selectFromHierarchy(Integer.parseInt(selection.split(":")[1]));
+        if (selector.mode.equals("CURRENCYSURFACE")) {
+            selector.clearSelection();
+            selector.clearMovers();
+            selector.makeSelection();
+            selector.selectFromHierarchy(Integer.parseInt(selection.split(":")[1]));
+        }
      }
 
 //    public void setSelectorToName(String name){

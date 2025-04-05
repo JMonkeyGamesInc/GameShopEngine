@@ -108,7 +108,7 @@ public final class MyGame extends SimpleApplication {
 //        flyCam.setDragToRotate(true);
         inputManager.setCursorVisible(true);
 
-        writeFileOnInternalStorage();//context, "hi.file", "HI EVERYONE");
+       // writeFileOnInternalStorage();//context, "hi.file", "HI EVERYONE");
 
 
 
@@ -140,6 +140,8 @@ public final class MyGame extends SimpleApplication {
 //            e.printStackTrace();
 //        }
     }
+
+
 //    public void writeFile(){
 //
 //        File fileMetadata = new File("hi.txt");

@@ -34,6 +34,7 @@ dependencies {
 
     implementation "androidx.multidex:multidex:2.0.1"
 
+    implementation 'com.google.android.gms:play-services-ads:23.2.0' // Use the latest version
     // GUI Library
     implementation libs.jme3.niftygui
 

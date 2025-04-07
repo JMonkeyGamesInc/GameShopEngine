@@ -1,12 +1,12 @@
-package com.jmonkeygamesinc.gameshop.niftygui;
+package com.jmonkeygamesinc.gameshopengine.niftygui;
 
 import com.jme3.app.Application;
 import com.jme3.math.Vector3f;
-import com.jmonkeygamesinc.gameshop.global.GameShopCurrencyMeshHash;
-import com.jmonkeygamesinc.gameshop.graphics.GameShopCurrencyLine;
-import com.jmonkeygamesinc.gameshop.graphics.GameShopCurrencyMesh;
-import com.jmonkeygamesinc.gameshop.graphics.GameShopCurrencySurface;
-import com.jmonkeygamesinc.gameshop.ui.Selector;
+import com.jmonkeygamesinc.gameshopengine.global.GameShopCurrencyMeshHash;
+import com.jmonkeygamesinc.gameshopengine.graphics.GameShopCurrencyLine;
+import com.jmonkeygamesinc.gameshopengine.graphics.GameShopCurrencyMesh;
+import com.jmonkeygamesinc.gameshopengine.graphics.GameShopCurrencySurface;
+import com.jmonkeygamesinc.gameshopengine.ui.Selector;
 
 import java.util.List;
 import java.util.Objects;
@@ -15,8 +15,6 @@ import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
 import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.controls.ListBoxSelectionChangedEvent;
-import de.lessvoid.nifty.controls.TextField;
-import de.lessvoid.nifty.controls.TextFieldChangedEvent;
 import de.lessvoid.nifty.screen.Screen;
 import de.lessvoid.nifty.screen.ScreenController;
 

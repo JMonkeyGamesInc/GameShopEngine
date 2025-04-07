@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.jmonkeygamesinc.gameshop'
+    namespace 'com.jmonkeygamesinc.gameshopengine'
     compileSdk 35
 
     defaultConfig {
-        applicationId "com.jmonkeygamesinc.gameshop"
+        applicationId "com.jmonkeygamesinc.gameshopengine"
         minSdk 21
         targetSdk 35
         versionCode 2
@@ -34,7 +34,7 @@ dependencies {
 
     implementation "androidx.multidex:multidex:2.0.1"
 
-    implementation 'com.google.android.gms:play-services-ads:23.2.0' // Use the latest version
+//    implementation 'com.google.android.gms:play-services-ads:23.2.0' // Use the latest version
     // GUI Library
     implementation libs.jme3.niftygui
 

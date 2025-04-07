@@ -20,5 +20,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "GameShop"
+rootProject.name = "GameShop Engine"
 include ':app'

@@ -1,4 +1,4 @@
-package com.jmonkeygamesinc.gameshop;
+package com.jmonkeygamesinc.gameshopengine;
 
 import android.content.Context;
 import android.os.Environment;
@@ -10,13 +10,13 @@ import com.jme3.math.Vector3f;
 import com.jme3.math.Vector4f;
 import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.scene.Node;
-import com.jmonkeygamesinc.gameshop.global.GameShopCurrencyMeshHash;
-import com.jmonkeygamesinc.gameshop.graphics.GameShopATMS;
-import com.jmonkeygamesinc.gameshop.graphics.GameShopCurrencyLine;
-import com.jmonkeygamesinc.gameshop.graphics.GameShopCurrencyMesh;
-import com.jmonkeygamesinc.gameshop.graphics.GameShopCurrencySurface;
-import com.jmonkeygamesinc.gameshop.niftygui.StartScreenController;
-import com.jmonkeygamesinc.gameshop.ui.Selector;
+import com.jmonkeygamesinc.gameshopengine.global.GameShopCurrencyMeshHash;
+import com.jmonkeygamesinc.gameshopengine.graphics.GameShopATMS;
+import com.jmonkeygamesinc.gameshopengine.graphics.GameShopCurrencyLine;
+import com.jmonkeygamesinc.gameshopengine.graphics.GameShopCurrencyMesh;
+import com.jmonkeygamesinc.gameshopengine.graphics.GameShopCurrencySurface;
+import com.jmonkeygamesinc.gameshopengine.niftygui.StartScreenController;
+import com.jmonkeygamesinc.gameshopengine.ui.Selector;
 
 import java.io.File;
 import java.io.FileWriter;

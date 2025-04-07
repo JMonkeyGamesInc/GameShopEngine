@@ -2,6 +2,9 @@ GameShop
 
 Author Lynden Jay Evans
 
+Please download Google Play App Listing before Publishing.  The License is $1000 App Download Plus Subscription and 
+50% Revenue Share per Game Published.  Thats saying I share 50% Of The profits for any game published.
+
 https://play.google.com/store/apps/details?id=com.jmonkeygamesinc.gameshop
 
 Please purchase the Google Play Store App for Legal Use.  Including a License for Publishing.

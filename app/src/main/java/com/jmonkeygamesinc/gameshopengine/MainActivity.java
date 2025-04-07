@@ -1,39 +1,18 @@
-package com.jmonkeygamesinc.gameshop;
+package com.jmonkeygamesinc.gameshopengine;
 
-import android.content.Context;
 import android.os.Bundle;
 
-import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
 import android.content.pm.ActivityInfo;
-import android.graphics.Rect;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.TouchDelegate;
 import android.view.View;
 import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.ads.AdError;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.FullScreenContentCallback;
-import com.google.android.gms.ads.LoadAdError;
-import com.google.android.gms.ads.interstitial.InterstitialAd;
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.jme3.app.LegacyApplication;
 import com.jme3.system.AppSettings;
 import com.jme3.view.surfaceview.JmeSurfaceView;
 import com.jme3.view.surfaceview.OnExceptionThrown;
 import com.jme3.view.surfaceview.OnRendererCompleted;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * <b>NB: Please Open this example <u>root module</u> using Android Studio; because android build scripts are different from java builds.</b>
@@ -48,8 +27,8 @@ import java.util.TimerTask;
 public final class MainActivity extends AppCompatActivity implements OnRendererCompleted, OnExceptionThrown {
 
 
-    private InterstitialAd mInterstitialAd;
-    private static final String TAG = "MainActivity";
+   // private InterstitialAd mInterstitialAd;
+   // private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +44,8 @@ public final class MainActivity extends AppCompatActivity implements OnRendererC
         /*start the game*/
         jmeSurfaceView.startRenderer(500);
 
+
+        /*
         AdRequest adRequest = new AdRequest.Builder().build();
 
         InterstitialAd.load(this, "ca-app-pub-3941175351589771/1535288966", adRequest,
@@ -134,6 +115,8 @@ public final class MainActivity extends AppCompatActivity implements OnRendererC
         };
 
         timer1.schedule(mTt1, 10000, 60000);
+
+        */
     }
 
     /**

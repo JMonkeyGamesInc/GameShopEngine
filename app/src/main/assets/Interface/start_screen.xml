@@ -3,7 +3,7 @@
 
     <useControls filename="nifty-default-controls.xml" />
     <useStyles filename="nifty-default-styles.xml" />
-    <screen id="start" controller="com.jmonkeygamesinc.gameshop.niftygui.StartScreenController">
+    <screen id="start" controller="com.jmonkeygamesinc.gameshopengine.niftygui.StartScreenController">
         <layer id="layer" backgroundColor="#0000" childLayout="center">
             <panel id="panel_complete" height="100%" width="100%" childLayout="vertical">
             <panel id="panel_complete_ui" height="80%" width="100%" childLayout="horizontal">

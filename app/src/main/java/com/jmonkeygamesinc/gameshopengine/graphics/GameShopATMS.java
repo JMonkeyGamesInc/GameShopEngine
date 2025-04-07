@@ -1,4 +1,4 @@
-package com.jmonkeygamesinc.gameshop.graphics;
+package com.jmonkeygamesinc.gameshopengine.graphics;
 import com.jme3.math.Vector4f;
 import com.jme3.texture.Image;
 //import org.lwjgl.BufferUtils;

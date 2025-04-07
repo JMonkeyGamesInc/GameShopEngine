@@ -1,4 +1,4 @@
-package com.jmonkeygamesinc.gameshop;
+package com.jmonkeygamesinc.gameshopengine;
 
 import android.content.Context;
 

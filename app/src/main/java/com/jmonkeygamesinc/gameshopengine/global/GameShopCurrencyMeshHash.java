@@ -1,6 +1,6 @@
-package com.jmonkeygamesinc.gameshop.global;
+package com.jmonkeygamesinc.gameshopengine.global;
 
-import com.jmonkeygamesinc.gameshop.graphics.GameShopCurrencyMesh;
+import com.jmonkeygamesinc.gameshopengine.graphics.GameShopCurrencyMesh;
 
 import java.util.HashMap;
 

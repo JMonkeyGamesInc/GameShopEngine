@@ -10,6 +10,7 @@ import com.jme3.math.Vector3f;
 import com.jme3.math.Vector4f;
 import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.scene.Node;
+import com.jmonkeygamesinc.gameshopengine.gameshopui.GameShopUICurrencyMesh;
 import com.jmonkeygamesinc.gameshopengine.global.GameShopCurrencyMeshHash;
 import com.jmonkeygamesinc.gameshopengine.graphics.GameShopATMS;
 import com.jmonkeygamesinc.gameshopengine.graphics.GameShopCurrencyLine;
@@ -53,7 +54,7 @@ public final class MyGame extends SimpleApplication {
     }
     @Override
     public void simpleInitApp() {
-        flyCam.setEnabled(false);
+        flyCam.setEnabled(true);
 
 
         viewPort.setBackgroundColor(ColorRGBA.White);
@@ -87,7 +88,43 @@ public final class MyGame extends SimpleApplication {
 
         GameShopCurrencyMeshHash.getInstance().cMeshes.put("Main", cm);
 
+
+        //**********************//
+
+        /*
+        GameShopATMS atmsUI = new GameShopATMS("BlueSquare", 128,128, new Vector4f[]{new Vector4f(0,1,0,1)});
+
+       // atmsUI.layer.drawCircle(64,64, 64, ColorRGBA.fromRGBA255( 0,255,0,255));
+        atmsUI.layer.drawSquare(32,64, 64, ColorRGBA.fromRGBA255( 0,0,255,255));
+        atmsUI.layer.drawSquare(32,64, 32, ColorRGBA.fromRGBA255( 0,255,0,255));
+
+        GameShopCurrencyLine[] clUI = new GameShopCurrencyLine[4];
+
+//        for (int i = 0; i < 4; i += 1){
+//
+//            clUI[i] = new GameShopCurrencyLine(new Vector3f[]{ new Vector3f(-1,((((float) i-5))+ (i * .33f)), 0), new Vector3f(-.33f,((((float) i-5))+ (i * .33f)), 0), new Vector3f(.33f,((((float) i-5))+ (i * .33f)), 0), new Vector3f(1f,((((float) i-5))+ (i * .33f)), 0)}, 2);
+//
+//        }
+
+        //for (int i = 0; i < 4; i += 1){
+
+        clUI[0] = new GameShopCurrencyLine(new Vector3f[]{ new Vector3f(-1, 0, 0), new Vector3f(-.33f, 0, 0), new Vector3f(.33f,0, 0), new Vector3f(1f,0, 0)}, 2);
+        clUI[1] = new GameShopCurrencyLine(new Vector3f[]{ new Vector3f(-1,.33f, 0), new Vector3f(-.33f,.33f, 0), new Vector3f(.33f,.33f, 0), new Vector3f(1f,.33f, 0)}, 2);
+        clUI[2] = new GameShopCurrencyLine(new Vector3f[]{ new Vector3f(-1,.66f, 0), new Vector3f(-.33f,.66f, 0), new Vector3f(.33f,.66f, 0), new Vector3f(1f,.66f, 0)}, 2);
+        clUI[3] = new GameShopCurrencyLine(new Vector3f[]{ new Vector3f(-1,1, 0), new Vector3f(-.33f,1, 0), new Vector3f(.33f,1, 0), new Vector3f(1f,1, 0)}, 2);
+
+       // }
+
+        GameShopCurrencySurface csUI = new GameShopCurrencySurface("0", cl);
+
+        GameShopUICurrencyMesh cmUI = new GameShopUICurrencyMesh(this, new Node("UI"), new GameShopCurrencySurface[]{csUI}, atmsUI);
+        cmUI.initShapes();
+
+        */
+        //GameShopCurrencyMeshHash.getInstance().cMeshes.put("Main", cm);
+
         Selector selector = new Selector(this);
+
 
         NiftyJmeDisplay niftyDisplay = NiftyJmeDisplay.newNiftyJmeDisplay(
                 assetManager,
@@ -106,8 +143,9 @@ public final class MyGame extends SimpleApplication {
         // disable the fly cam
 //        flyCam.setEnabled(false);
 //        flyCam.setDragToRotate(true);
-        inputManager.setCursorVisible(true);
 
+
+        inputManager.setCursorVisible(true);
        // writeFileOnInternalStorage();//context, "hi.file", "HI EVERYONE");
 
 

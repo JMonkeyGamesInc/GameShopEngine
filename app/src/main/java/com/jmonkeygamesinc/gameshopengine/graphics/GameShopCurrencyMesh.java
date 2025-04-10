@@ -1,6 +1,7 @@
 package com.jmonkeygamesinc.gameshopengine.graphics;
 
 import com.jme3.app.SimpleApplication;
+import com.jme3.material.RenderState;
 import com.jme3.scene.Mesh;
 
 import com.jme3.material.Material;
@@ -46,7 +47,7 @@ public class GameShopCurrencyMesh {
     //public String name;
 
     public Mesh m;
-    Geometry geom;
+    public Geometry geom;
     public GameShopCurrencyMesh(SimpleApplication app,  Node node, GameShopCurrencySurface[] gspSurfaces, GameShopATMS atms){
 
        // this.name = name;
@@ -131,8 +132,8 @@ public class GameShopCurrencyMesh {
             }
         }
 
-        //   System.out.println(vertices.length);
-        // System.out.println(Arrays.toString(vertices));
+          // System.out.println(vertices.length);
+         //System.out.println(Arrays.toString(vertices));
 
         int j = 0;
         for (float v: vertices){
@@ -197,8 +198,8 @@ public class GameShopCurrencyMesh {
 //              }
 //           }
 //        }
-        //System.out.println(vertices.length);
-        //System.out.println(Arrays.toString(vertices));
+//        System.out.println(vertices.length);
+//        System.out.println(Arrays.toString(vertices));
     }
 
     int skips = 0;
@@ -222,7 +223,7 @@ public class GameShopCurrencyMesh {
 //             }
 //         }
 
-        totalIndices = (this.vertices.length / 3) * 6;
+        totalIndices = ((this.vertices.length / 3) * 6);// - this.gspSurfaces[0].currencyLines.length;
 
         // totalIndices -= 150;
         //  totalIndices = (totalIndices/4) * 6;
@@ -262,11 +263,11 @@ public class GameShopCurrencyMesh {
 //        
 //            break;
 //        }
-                    if (isBreak){
-
-                        break;
-
-                    }
+//                    if (isBreak){
+//
+//                        break;
+//
+//                    }
 //        
 //            if (l > 0 && l % (gspl.numPoints) == 0) {
 // 
@@ -294,6 +295,11 @@ public class GameShopCurrencyMesh {
                         break;
                     }
 
+//                    if (i > gspl.numPoints && (float)( (i - 1) + gspl.numPoints) % gspl.numPoints == 0){
+//
+//                        i++;
+//                        continue;
+//                    }
 
                     indices[index] = (short) (i + gspl.numPoints + 1);
                     indices[index + 1] = (short) (i + 1);
@@ -353,8 +359,8 @@ public class GameShopCurrencyMesh {
         }
 
         indices = Arrays.copyOfRange(indices, 0, finalIndex);
-//        System.out.println("indices");
-//        System.out.println(Arrays.toString(indices));
+        //System.out.println("indices");
+        //System.out.println(Arrays.toString(indices));
     }
 
     public void allocateTexCoords(){
@@ -474,6 +480,10 @@ public class GameShopCurrencyMesh {
         m.setBuffer(Type.TexCoord, 2, BufferUtils.createFloatBuffer(texCoord));
         m.setBuffer(Type.Index, 1, BufferUtils.createIntBuffer(indices));
         m.updateBound();
+//        m.updateCounts();
+//        if (geom != null) {
+//            geom.updateModelBound();
+//        }
        // geom.updateModelBound();
         //node.c
         //node.getChild(0).
@@ -510,11 +520,20 @@ public class GameShopCurrencyMesh {
         // Creating a geometry, and apply a single color material to it
           geom = new Geometry("OurMesh", m);
         Material mat = new Material(app.getAssetManager(), "Common/MatDefs/Misc/Unshaded.j3md");
+       // mat.getAdditionalRenderState().s
+        //mat.getAdditionalRenderState().setFaceCullMode(RenderState.FaceCullMode.Off);
+        //Material mat = new Material(app.getAssetManager(), "MatDefs/GameShopUI.j3md");
+        mat.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
+        mat.getAdditionalRenderState().setBlendEquation(RenderState.BlendEquation.Add);
+        mat.getAdditionalRenderState().setBlendEquationAlpha(RenderState.BlendEquationAlpha.Max);
 
         Texture2D texture = new Texture2D(this.atms.makeATMS());
 
         mat.setColor("Color", ColorRGBA.fromRGBA255(128,128,128,128));
+
         mat.setTexture("ColorMap", texture);
+
+
         geom.setMaterial(mat);
 
 

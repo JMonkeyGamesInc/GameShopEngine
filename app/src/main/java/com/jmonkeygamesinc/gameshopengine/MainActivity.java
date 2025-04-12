@@ -1,5 +1,6 @@
 package com.jmonkeygamesinc.gameshopengine;
 
+import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import com.jme3.system.AppSettings;
 import com.jme3.view.surfaceview.JmeSurfaceView;
 import com.jme3.view.surfaceview.OnExceptionThrown;
 import com.jme3.view.surfaceview.OnRendererCompleted;
+import com.jmonkeygamesinc.gameshopengine.opengl.MyGLSurfaceView;
 
 /**
  * <b>NB: Please Open this example <u>root module</u> using Android Studio; because android build scripts are different from java builds.</b>
@@ -24,15 +26,22 @@ import com.jme3.view.surfaceview.OnRendererCompleted;
  *
  * @author Lynden Jay Evans of JMonkeyGames Inc.
  */
-public final class MainActivity extends AppCompatActivity implements OnRendererCompleted, OnExceptionThrown {
+public final class MainActivity extends AppCompatActivity  implements OnRendererCompleted, OnExceptionThrown {
 
 
+    GLSurfaceView mGLView;
    // private InterstitialAd mInterstitialAd;
    // private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+   // Create a GLSurfaceView instance and set it
+        // as the ContentView for this Activity
+//        mGLView = new MyGLSurfaceView(this);
+//        setContentView(mGLView);
+
         setContentView(R.layout.activity_main);
         /*define the android view with it's id from xml*/
         final JmeSurfaceView jmeSurfaceView = findViewById(R.id.jmeSurfaceView);
@@ -43,6 +52,8 @@ public final class MainActivity extends AppCompatActivity implements OnRendererC
         jmeSurfaceView.setOnRendererCompleted(this);
         /*start the game*/
         jmeSurfaceView.startRenderer(500);
+
+
 
 
         /*
@@ -138,6 +149,25 @@ public final class MainActivity extends AppCompatActivity implements OnRendererC
     public void onRenderCompletion(LegacyApplication application, AppSettings appSettings) {
         Toast.makeText(MainActivity.this, "User's Delay Finished w/o errors !" + application.getContext() + " " + appSettings.getFrameRate(), Toast.LENGTH_SHORT).show();
     }
+
+//     @Override
+//    protected void onPause() {
+//        super.onPause();
+//        // The following call pauses the rendering thread.
+//        // If your OpenGL application is memory intensive,
+//        // you should consider de-allocating objects that
+//        // consume significant memory here.
+//        mGLView.onPause();
+//    }
+//
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        // The following call resumes a paused rendering thread.
+//        // If you de-allocated graphic objects for onPause()
+//        // this is a good place to re-allocate them.
+//        mGLView.onResume();
+//    }
 
     /**
      * Fired when the screen has/hasNo touch/mouse focus.

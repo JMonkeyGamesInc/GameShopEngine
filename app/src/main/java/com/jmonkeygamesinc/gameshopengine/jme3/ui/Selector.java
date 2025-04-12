@@ -1,4 +1,4 @@
-package com.jmonkeygamesinc.gameshopengine.ui;
+package com.jmonkeygamesinc.gameshopengine.jme3.ui;
 
 import com.jme3.app.SimpleApplication;
 import com.jme3.asset.AssetKey;
@@ -14,10 +14,10 @@ import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.shape.Box;
-import com.jmonkeygamesinc.gameshopengine.global.GameShopCurrencyMeshHash;
-import com.jmonkeygamesinc.gameshopengine.graphics.GameShopCurrencyLine;
-import com.jmonkeygamesinc.gameshopengine.graphics.GameShopCurrencyMesh;
-import com.jmonkeygamesinc.gameshopengine.graphics.GameShopCurrencySurface;
+import com.jmonkeygamesinc.gameshopengine.jme3.global.GameShopCurrencyMeshHash;
+import com.jmonkeygamesinc.gameshopengine.jme3.graphics.GameShopCurrencyLine;
+import com.jmonkeygamesinc.gameshopengine.jme3.graphics.GameShopCurrencyMesh;
+import com.jmonkeygamesinc.gameshopengine.jme3.graphics.GameShopCurrencySurface;
 
 import java.util.ArrayList;
 import java.util.Objects;

@@ -1,12 +1,12 @@
-package com.jmonkeygamesinc.gameshopengine.niftygui;
+package com.jmonkeygamesinc.gameshopengine.jme3.niftygui;
 
 import com.jme3.app.Application;
 import com.jme3.math.Vector3f;
-import com.jmonkeygamesinc.gameshopengine.global.GameShopCurrencyMeshHash;
-import com.jmonkeygamesinc.gameshopengine.graphics.GameShopCurrencyLine;
-import com.jmonkeygamesinc.gameshopengine.graphics.GameShopCurrencyMesh;
-import com.jmonkeygamesinc.gameshopengine.graphics.GameShopCurrencySurface;
-import com.jmonkeygamesinc.gameshopengine.ui.Selector;
+import com.jmonkeygamesinc.gameshopengine.jme3.global.GameShopCurrencyMeshHash;
+import com.jmonkeygamesinc.gameshopengine.jme3.graphics.GameShopCurrencyLine;
+import com.jmonkeygamesinc.gameshopengine.jme3.graphics.GameShopCurrencyMesh;
+import com.jmonkeygamesinc.gameshopengine.jme3.graphics.GameShopCurrencySurface;
+import com.jmonkeygamesinc.gameshopengine.jme3.ui.Selector;
 
 import java.util.List;
 import java.util.Objects;

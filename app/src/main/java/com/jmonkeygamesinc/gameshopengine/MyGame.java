@@ -10,20 +10,22 @@ import com.jme3.math.Vector3f;
 import com.jme3.math.Vector4f;
 import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.scene.Node;
-import com.jmonkeygamesinc.gameshopengine.gameshopui.GameShopUICurrencyMesh;
-import com.jmonkeygamesinc.gameshopengine.global.GameShopCurrencyMeshHash;
-import com.jmonkeygamesinc.gameshopengine.graphics.GameShopATMS;
-import com.jmonkeygamesinc.gameshopengine.graphics.GameShopCurrencyLine;
-import com.jmonkeygamesinc.gameshopengine.graphics.GameShopCurrencyMesh;
-import com.jmonkeygamesinc.gameshopengine.graphics.GameShopCurrencySurface;
-import com.jmonkeygamesinc.gameshopengine.niftygui.StartScreenController;
-import com.jmonkeygamesinc.gameshopengine.ui.Selector;
+import com.jmonkeygamesinc.gameshopengine.jme3.global.GameShopCurrencyMeshHash;
+import com.jmonkeygamesinc.gameshopengine.jme3.graphics.GameShopATMS;
+import com.jmonkeygamesinc.gameshopengine.jme3.graphics.GameShopCurrencyLine;
+import com.jmonkeygamesinc.gameshopengine.jme3.graphics.GameShopCurrencyMesh;
+import com.jmonkeygamesinc.gameshopengine.jme3.graphics.GameShopCurrencySurface;
+import com.jmonkeygamesinc.gameshopengine.jme3.niftygui.StartScreenController;
+import com.jmonkeygamesinc.gameshopengine.jme3.ui.Selector;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
 import de.lessvoid.nifty.Nifty;
+
+import com.jme3.renderer.android.AndroidGL;
+
 //import com.simsilica.lemur.Button;
 //import com.simsilica.lemur.Command;
 //import com.simsilica.lemur.Container;

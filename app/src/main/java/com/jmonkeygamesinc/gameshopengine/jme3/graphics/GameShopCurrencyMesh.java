@@ -1,4 +1,4 @@
-package com.jmonkeygamesinc.gameshopengine.graphics;
+package com.jmonkeygamesinc.gameshopengine.jme3.graphics;
 
 import com.jme3.app.SimpleApplication;
 import com.jme3.material.RenderState;
@@ -198,7 +198,7 @@ public class GameShopCurrencyMesh {
 //              }
 //           }
 //        }
-//        System.out.println(vertices.length);
+       System.out.println(vertices.length);
 //        System.out.println(Arrays.toString(vertices));
     }
 
@@ -223,7 +223,7 @@ public class GameShopCurrencyMesh {
 //             }
 //         }
 
-        totalIndices = ((this.vertices.length / 3) * 6);// - this.gspSurfaces[0].currencyLines.length;
+        totalIndices = ((this.vertices.length / 3) * 6) + 8;// - this.gspSurfaces[0].currencyLines.length;
 
         // totalIndices -= 150;
         //  totalIndices = (totalIndices/4) * 6;
@@ -235,6 +235,7 @@ public class GameShopCurrencyMesh {
         int i = 0;
         int line = 0;
         int l = 0;
+        int lineNum = 0;
         boolean isBreak = false;
 
         for (GameShopCurrencySurface gsps: this.gspSurfaces){
@@ -288,18 +289,30 @@ public class GameShopCurrencyMesh {
                     //if (index == 0 || index % gspl.infinitesimals.length != 0){
 
                     if ((short) (i + gspl.numPoints + 1) == (short)(vertices.length/3) - 1){
+                   // if ((short) (i + gspl.numPoints + 1) == (short)((384)/6)-1){
 
                         finalIndex = index;
                         // System.out.println("BREAK");
                         isBreak = true;
                         break;
                     }
+                    System.out.println("numPoints " + gspl.numPoints);
 
-//                    if (i > gspl.numPoints && (float)( (i - 1) + gspl.numPoints) % gspl.numPoints == 0){
-//
-//                        i++;
-//                        continue;
-//                    }
+                   // if (i >= gspl.numPoints  && (int)( (float)((i) * gspl.numPoints) % gspl.numPoints) == 0){
+
+                    if (lineNum == gspl.numPoints){
+                        System.out.println("i" + i);
+                        indices[index] = 0;
+                        indices[index + 1] = 0;
+                        indices[index + 2] = 0;
+                        indices[index + 3] = 0;
+                        indices[index + 4] = 0;
+                        indices[index + 5] = 0;
+                        i++;
+                        index+=6;
+                        lineNum = 0;
+                        continue;
+                    }
 
                     indices[index] = (short) (i + gspl.numPoints + 1);
                     indices[index + 1] = (short) (i + 1);
@@ -344,6 +357,7 @@ public class GameShopCurrencyMesh {
                     index += 6;
 
 
+                    lineNum++;
                     //i++;
                 }
 
@@ -359,8 +373,8 @@ public class GameShopCurrencyMesh {
         }
 
         indices = Arrays.copyOfRange(indices, 0, finalIndex);
-        //System.out.println("indices");
-        //System.out.println(Arrays.toString(indices));
+        System.out.println("indices");
+        System.out.println(Arrays.toString(indices));
     }
 
     public void allocateTexCoords(){
@@ -520,8 +534,8 @@ public class GameShopCurrencyMesh {
         // Creating a geometry, and apply a single color material to it
           geom = new Geometry("OurMesh", m);
         Material mat = new Material(app.getAssetManager(), "Common/MatDefs/Misc/Unshaded.j3md");
-       // mat.getAdditionalRenderState().s
-        //mat.getAdditionalRenderState().setFaceCullMode(RenderState.FaceCullMode.Off);
+       // mat.getAdditionalRenderState().setDepthTest(true);
+        mat.getAdditionalRenderState().setFaceCullMode(RenderState.FaceCullMode.Off);
         //Material mat = new Material(app.getAssetManager(), "MatDefs/GameShopUI.j3md");
         mat.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
         mat.getAdditionalRenderState().setBlendEquation(RenderState.BlendEquation.Add);

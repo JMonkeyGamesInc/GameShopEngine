@@ -1,4 +1,4 @@
-package com.jmonkeygamesinc.gameshopengine.gameshopui;
+package com.jmonkeygamesinc.gameshopengine.jme3.gameshopui;
 
 import com.jme3.app.SimpleApplication;
 import com.jme3.material.Material;
@@ -6,9 +6,9 @@ import com.jme3.math.ColorRGBA;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.texture.Texture2D;
-import com.jmonkeygamesinc.gameshopengine.graphics.GameShopATMS;
-import com.jmonkeygamesinc.gameshopengine.graphics.GameShopCurrencyMesh;
-import com.jmonkeygamesinc.gameshopengine.graphics.GameShopCurrencySurface;
+import com.jmonkeygamesinc.gameshopengine.jme3.graphics.GameShopATMS;
+import com.jmonkeygamesinc.gameshopengine.jme3.graphics.GameShopCurrencyMesh;
+import com.jmonkeygamesinc.gameshopengine.jme3.graphics.GameShopCurrencySurface;
 
 public class GameShopUICurrencyMesh extends GameShopCurrencyMesh {
     public GameShopUICurrencyMesh(SimpleApplication app, Node node, GameShopCurrencySurface[] gspSurfaces, GameShopATMS atms) {

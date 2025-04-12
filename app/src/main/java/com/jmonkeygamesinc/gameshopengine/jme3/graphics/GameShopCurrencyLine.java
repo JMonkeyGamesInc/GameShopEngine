@@ -1,4 +1,4 @@
-package com.jmonkeygamesinc.gameshopengine.graphics;
+package com.jmonkeygamesinc.gameshopengine.jme3.graphics;
 
 import com.jme3.math.FastMath;
 import com.jme3.math.Vector3f;

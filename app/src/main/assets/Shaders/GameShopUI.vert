@@ -22,5 +22,5 @@ void main(){
     //The multiplication must be done in this order.
     //gl_Position = g_WorldViewProjectionMatrix * vec4(inPosition, 1.0);
 
-    gl_Position = vec4(inPosition.x - 1.0, inPosition.y - 1.0, 0.0, 1.0);
+    gl_Position = vec4((inPosition.x - 1.0) * 2.0, inPosition.y, 0.0, 1.0);
 }

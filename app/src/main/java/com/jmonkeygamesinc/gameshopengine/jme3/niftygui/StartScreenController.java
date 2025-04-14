@@ -13,6 +13,7 @@ import java.util.Objects;
 
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.NiftyEventSubscriber;
+import de.lessvoid.nifty.controls.ButtonClickedEvent;
 import de.lessvoid.nifty.controls.ListBox;
 import de.lessvoid.nifty.controls.ListBoxSelectionChangedEvent;
 import de.lessvoid.nifty.screen.Screen;
@@ -264,5 +265,16 @@ public class StartScreenController implements ScreenController {
 
         selector.action = "ANIMATE";
 
+    }
+
+//    @NiftyEventSubscriber(id="button_toggle_selectors")
+//    public void onButtonToggleSelectorsClicked(final String topic,final ButtonClickedEvent event){
+//
+//        System.out.println("PRINT: " + "hi");
+//
+//    }
+    public void print(){
+
+        System.out.println("PRINT: " + "hi");
     }
 }

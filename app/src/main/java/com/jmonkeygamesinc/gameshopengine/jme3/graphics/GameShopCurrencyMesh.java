@@ -2,6 +2,7 @@ package com.jmonkeygamesinc.gameshopengine.jme3.graphics;
 
 import com.jme3.app.SimpleApplication;
 import com.jme3.material.RenderState;
+import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Mesh;
 
 import com.jme3.material.Material;
@@ -537,9 +538,14 @@ public class GameShopCurrencyMesh {
        // mat.getAdditionalRenderState().setDepthTest(true);
         mat.getAdditionalRenderState().setFaceCullMode(RenderState.FaceCullMode.Off);
         //Material mat = new Material(app.getAssetManager(), "MatDefs/GameShopUI.j3md");
+
         mat.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
-        mat.getAdditionalRenderState().setBlendEquation(RenderState.BlendEquation.Add);
-        mat.getAdditionalRenderState().setBlendEquationAlpha(RenderState.BlendEquationAlpha.Max);
+        mat.setTransparent(true); //not sure if it was needed rly
+        geom.setQueueBucket(RenderQueue.Bucket.Transparent);
+
+
+//        mat.getAdditionalRenderState().setBlendEquation(RenderState.BlendEquation.Add);
+//        mat.getAdditionalRenderState().setBlendEquationAlpha(RenderState.BlendEquationAlpha.Max);
 
         Texture2D texture = new Texture2D(this.atms.makeATMS());
 

@@ -600,6 +600,7 @@ public class Selector {
                     Vector3f moveDir = new Vector3f();
                     System.out.println("LAST " + lastPosition);
                     System.out.println("CURRENT " + currentPosition);
+                    float moveFactor = 0.01f;
                     for (int i = 0; i < 6; i++){
 
 
@@ -612,45 +613,45 @@ public class Selector {
 
                                     if (currentPosition.x - lastPosition.x > 0){
 
-                                        moveSelectorAndVector(new Vector3f(.1f, 0, 0));
+                                        moveSelectorAndVector(new Vector3f(moveFactor, 0, 0));
                                     }  else {
-                                        moveSelectorAndVector(new Vector3f(-.1f, 0, 0));
+                                        moveSelectorAndVector(new Vector3f(-moveFactor, 0, 0));
 
                                     }
                                 } else if (i == 1){
 
                                     if (currentPosition.x - lastPosition.x > 0){
 
-                                        moveSelectorAndVector(new Vector3f(.1f, 0, 0));
+                                        moveSelectorAndVector(new Vector3f(moveFactor, 0, 0));
                                     }  else {
-                                        moveSelectorAndVector(new Vector3f(-.1f, 0, 0));
+                                        moveSelectorAndVector(new Vector3f(-moveFactor, 0, 0));
 
                                     }
                                 } else if (i == 2){
 
                                     if (currentPosition.x - lastPosition.x > 0){
 
-                                        moveSelectorAndVector(new Vector3f(0, .1f, 0));
+                                        moveSelectorAndVector(new Vector3f(0, moveFactor, 0));
                                     }  else {
-                                        moveSelectorAndVector(new Vector3f(0, -.1f, 0));
+                                        moveSelectorAndVector(new Vector3f(0, -moveFactor, 0));
 
                                     }
                                 } else if (i == 3){
 
                                     if (currentPosition.x - lastPosition.x > 0){
 
-                                        moveSelectorAndVector(new Vector3f(0, .1f, 0));
+                                        moveSelectorAndVector(new Vector3f(0, moveFactor, 0));
                                     }  else {
-                                        moveSelectorAndVector(new Vector3f(0, -.1f, 0));
+                                        moveSelectorAndVector(new Vector3f(0, -moveFactor, 0));
 
                                     }
                                 } else if (i == 4){
 
                                     if (currentPosition.x - lastPosition.x > 0){
 
-                                        moveSelectorAndVector(new Vector3f(0, 0, .1f));
+                                        moveSelectorAndVector(new Vector3f(0, 0, moveFactor));
                                     }  else {
-                                        moveSelectorAndVector(new Vector3f(0, 0, -.1f));
+                                        moveSelectorAndVector(new Vector3f(0, 0, -moveFactor));
 
                                     }
                                 } else if (i == 5){
@@ -658,9 +659,9 @@ public class Selector {
                                     if (currentPosition.x - lastPosition.x > 0){
 
 
-                                        moveSelectorAndVector(new Vector3f(0, 0, .1f));
+                                        moveSelectorAndVector(new Vector3f(0, 0, moveFactor));
                                     }  else {
-                                        moveSelectorAndVector(new Vector3f(0,0, -.1f));
+                                        moveSelectorAndVector(new Vector3f(0,0, -moveFactor));
 
                                     }
                                 }

@@ -10,6 +10,7 @@ import com.jme3.math.Vector3f;
 import com.jme3.math.Vector4f;
 import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.scene.Node;
+import com.jmonkeygamesinc.gameshopengine.jme3.gameshopui.GameShopUICurrencyMesh;
 import com.jmonkeygamesinc.gameshopengine.jme3.global.GameShopCurrencyMeshHash;
 import com.jmonkeygamesinc.gameshopengine.jme3.graphics.GameShopATMS;
 import com.jmonkeygamesinc.gameshopengine.jme3.graphics.GameShopCurrencyLine;
@@ -58,6 +59,8 @@ public final class MyGame extends SimpleApplication {
     public void simpleInitApp() {
         flyCam.setEnabled(true);
 
+        this.setShowSettings(false);
+        this.setDisplayStatView(false);
 
         viewPort.setBackgroundColor(ColorRGBA.White);
 
@@ -93,12 +96,13 @@ public final class MyGame extends SimpleApplication {
 
         //**********************//
 
-        /*
-        GameShopATMS atmsUI = new GameShopATMS("BlueSquare", 128,128, new Vector4f[]{new Vector4f(0,1,0,1)});
+
+        float zAxis = 0f;//this.getCamera().getFrustumNear();
+        GameShopATMS atmsUI = new GameShopATMS("BlueSquare", 256,256, new Vector4f[]{new Vector4f(0,1,0,1)});
 
        // atmsUI.layer.drawCircle(64,64, 64, ColorRGBA.fromRGBA255( 0,255,0,255));
-        atmsUI.layer.drawSquare(32,64, 64, ColorRGBA.fromRGBA255( 0,0,255,255));
-        atmsUI.layer.drawSquare(32,64, 32, ColorRGBA.fromRGBA255( 0,255,0,255));
+        atmsUI.layer.drawSquare(32,64, 256, ColorRGBA.fromRGBA255( 0,0,255,128));
+        atmsUI.layer.drawCircle(128,128, 32, ColorRGBA.fromRGBA255( 0,255,0,128));
 
         GameShopCurrencyLine[] clUI = new GameShopCurrencyLine[4];
 
@@ -110,37 +114,37 @@ public final class MyGame extends SimpleApplication {
 
         //for (int i = 0; i < 4; i += 1){
 
-        clUI[0] = new GameShopCurrencyLine(new Vector3f[]{ new Vector3f(-1, 0, 0), new Vector3f(-.33f, 0, 0), new Vector3f(.33f,0, 0), new Vector3f(1f,0, 0)}, 2);
-        clUI[1] = new GameShopCurrencyLine(new Vector3f[]{ new Vector3f(-1,.33f, 0), new Vector3f(-.33f,.33f, 0), new Vector3f(.33f,.33f, 0), new Vector3f(1f,.33f, 0)}, 2);
-        clUI[2] = new GameShopCurrencyLine(new Vector3f[]{ new Vector3f(-1,.66f, 0), new Vector3f(-.33f,.66f, 0), new Vector3f(.33f,.66f, 0), new Vector3f(1f,.66f, 0)}, 2);
-        clUI[3] = new GameShopCurrencyLine(new Vector3f[]{ new Vector3f(-1,1, 0), new Vector3f(-.33f,1, 0), new Vector3f(.33f,1, 0), new Vector3f(1f,1, 0)}, 2);
+        clUI[0] = new GameShopCurrencyLine(new Vector3f[]{ new Vector3f(-0f, -1, zAxis), new Vector3f(1f, -1, zAxis), new Vector3f(1f,-1, zAxis), new Vector3f(2f,-1, zAxis)}, 2);
+        clUI[1] = new GameShopCurrencyLine(new Vector3f[]{ new Vector3f(-0f,-.33f, zAxis), new Vector3f(1f,-.33f, zAxis), new Vector3f(1f,-.33f, zAxis), new Vector3f(2f,-.33f, zAxis)}, 2);
+        clUI[2] = new GameShopCurrencyLine(new Vector3f[]{ new Vector3f(-0f,.33f, zAxis), new Vector3f(1f,.33f, zAxis), new Vector3f(1f,.33f, zAxis), new Vector3f(2f,.33f, zAxis)}, 2);
+        clUI[3] = new GameShopCurrencyLine(new Vector3f[]{ new Vector3f(-0f,1, zAxis), new Vector3f(1f,1, zAxis), new Vector3f(1f,1, zAxis), new Vector3f(2f,1, zAxis)}, 2);
 
        // }
 
-        GameShopCurrencySurface csUI = new GameShopCurrencySurface("0", cl);
+        GameShopCurrencySurface csUI = new GameShopCurrencySurface("0", clUI);
 
         GameShopUICurrencyMesh cmUI = new GameShopUICurrencyMesh(this, new Node("UI"), new GameShopCurrencySurface[]{csUI}, atmsUI);
         cmUI.initShapes();
 
-        */
+
         //GameShopCurrencyMeshHash.getInstance().cMeshes.put("Main", cm);
 
         Selector selector = new Selector(this);
 
 
-        NiftyJmeDisplay niftyDisplay = NiftyJmeDisplay.newNiftyJmeDisplay(
-                assetManager,
-                inputManager,
-                audioRenderer,
-                guiViewPort);
-        nifty = niftyDisplay.getNifty();
-        StartScreenController startScreen = new StartScreenController(this, selector);
-//        nifty.loadControlFile("nifty-default-controls.xml");
-//        nifty.loadStyleFile("nifty-default-styles.xml");
-        nifty.fromXml("Interface/start_screen.xml", "start", startScreen);
-        //startScreen.fillMyListBox();
-        // attach the nifty display to the gui view port as a processor
-        guiViewPort.addProcessor(niftyDisplay);
+//        NiftyJmeDisplay niftyDisplay = NiftyJmeDisplay.newNiftyJmeDisplay(
+//                assetManager,
+//                inputManager,
+//                audioRenderer,
+//                guiViewPort);
+//        nifty = niftyDisplay.getNifty();
+//        StartScreenController startScreen = new StartScreenController(this, selector);
+////        nifty.loadControlFile("nifty-default-controls.xml");
+////        nifty.loadStyleFile("nifty-default-styles.xml");
+//        nifty.fromXml("Interface/start_screen.xml", "start", startScreen);
+//        //startScreen.fillMyListBox();
+//        // attach the nifty display to the gui view port as a processor
+//        guiViewPort.addProcessor(niftyDisplay);
 
         // disable the fly cam
 //        flyCam.setEnabled(false);

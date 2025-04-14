@@ -11,6 +11,9 @@ void main(){
     //returning the color of the pixel (here solid blue)
     //- gl_FragColor is the standard GLSL variable that holds the pixel
     //color. It must be filled in the Fragment Shader.
+//    if (m_Color.a < 0.4){
+//        discard;
+//    }
     #ifdef COLORMAP
         gl_FragColor = m_Color * texture2D(m_ColorMap, texCoord1);
     #else

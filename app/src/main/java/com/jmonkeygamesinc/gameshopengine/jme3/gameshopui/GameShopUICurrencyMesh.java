@@ -2,7 +2,9 @@ package com.jmonkeygamesinc.gameshopengine.jme3.gameshopui;
 
 import com.jme3.app.SimpleApplication;
 import com.jme3.material.Material;
+import com.jme3.material.RenderState;
 import com.jme3.math.ColorRGBA;
+import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.texture.Texture2D;
@@ -52,9 +54,17 @@ public class GameShopUICurrencyMesh extends GameShopCurrencyMesh {
 
         Material mat = new Material(app.getAssetManager(), "MatDefs/GameShopUI.j3md");
 
+        mat.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
+
+        //mat.setTransparent(true); //not sure if it was needed rly
+        geom.setQueueBucket(RenderQueue.Bucket.Translucent);
+
+//        mat.getAdditionalRenderState().setBlendEquation(RenderState.BlendEquation.Add);
+//        mat.getAdditionalRenderState().setBlendEquationAlpha(RenderState.BlendEquationAlpha.Max);
+
         Texture2D texture = new Texture2D(this.atms.makeATMS());
 
-        mat.setColor("Color", ColorRGBA.fromRGBA255(128,128,128,128));
+        mat.setColor("Color", ColorRGBA.fromRGBA255(128,128,128,255));
 
         mat.setTexture("ColorMap", texture);
 

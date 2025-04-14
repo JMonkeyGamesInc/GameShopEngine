@@ -14,7 +14,7 @@ import com.jme3.system.AppSettings;
 import com.jme3.view.surfaceview.JmeSurfaceView;
 import com.jme3.view.surfaceview.OnExceptionThrown;
 import com.jme3.view.surfaceview.OnRendererCompleted;
-import com.jmonkeygamesinc.gameshopengine.opengl.MyGLSurfaceView;
+//import com.jmonkeygamesinc.gameshopengine.opengl.MyGLSurfaceView;
 
 /**
  * <b>NB: Please Open this example <u>root module</u> using Android Studio; because android build scripts are different from java builds.</b>

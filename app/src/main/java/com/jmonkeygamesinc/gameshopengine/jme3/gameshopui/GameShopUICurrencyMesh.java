@@ -54,6 +54,7 @@ public class GameShopUICurrencyMesh extends GameShopCurrencyMesh {
 
         Material mat = new Material(app.getAssetManager(), "MatDefs/GameShopUI.j3md");
 
+        //mat.getAdditionalRenderState().setFaceCullMode(RenderState.FaceCullMode.Off);
         mat.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
 
         //mat.setTransparent(true); //not sure if it was needed rly
@@ -77,7 +78,7 @@ public class GameShopUICurrencyMesh extends GameShopCurrencyMesh {
         // Attaching our geometry to the root node.
         node.attachChild(geom);
 
-        this.app.getRootNode().attachChild(node);
+        this.app.getGuiNode().attachChild(node);
 
     }
 }

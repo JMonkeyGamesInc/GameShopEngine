@@ -158,6 +158,11 @@ public final class MyGame extends SimpleApplication {
 
     }
 
+    @Override
+    public void update() {
+        super.update();
+    }
+
     public void writeFileOnInternalStorage(){ //Context mcoContext, String sFileName, String sBody){
         //System.out.println("FILE: " + mcoContext.getFilesDir());
         //File dir = new File(mcoContext.getFilesDir(), "mydir");

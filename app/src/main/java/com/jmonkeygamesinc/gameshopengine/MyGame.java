@@ -102,8 +102,9 @@ public final class MyGame extends SimpleApplication {
 
        // atmsUI.layer.drawCircle(64,64, 64, ColorRGBA.fromRGBA255( 0,255,0,255));
         atmsUI.layer.drawSquare(32,64, 256, ColorRGBA.fromRGBA255( 0,0,255,128));
-        atmsUI.layer.drawAspectRatioSquare(128,128, 32, ColorRGBA.fromRGBA255( 0,255,0,128));
-        atmsUI.layer.drawAspectRatioSquare(95,128, 32, ColorRGBA.fromRGBA255( 255,0,0,128));
+        atmsUI.layer.drawCircle(128,128, 32, ColorRGBA.fromRGBA255( 0,255,0,128));
+        //atmsUI.layer.drawAspectRatioSquare(96,128, 32, ColorRGBA.fromRGBA255( 255,0,0,128));
+        //atmsUI.layer.drawAspectRatioSquare(64,32, 32, ColorRGBA.fromRGBA255( 255,0,255,128));
 
         GameShopCurrencyLine[] clUI = new GameShopCurrencyLine[4];
 

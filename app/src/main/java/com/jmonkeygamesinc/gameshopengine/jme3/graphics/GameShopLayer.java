@@ -75,7 +75,7 @@ public class GameShopLayer {
         if (pointX - currency <= 0){
             startX = 0;
         } else {
-            startX = (int)((float)((pointX - (currency * (4f/7f))) + 1) );//+ (((float)((pointX - currency * (1f/3f)) + 1) * (1f/3f))));
+            startX = (int)((float)((pointX - (currency * (3f/7f))) + 1) );//+ (((float)((pointX - currency * (1f/3f)) + 1) * (1f/3f))));
         }
 
         if (pointY - currency <= 0){
@@ -87,7 +87,7 @@ public class GameShopLayer {
         if (pointX + currency >= width){
             endX = width;
         } else {
-            endX = (int)((float)((pointX + (currency *(4f/7f))) - 1) );// - ((float)((pointX + currency) - 1)* (1f/3f)));
+            endX = (int)((float)((pointX + (currency *(3f/7f))) - 1) );// - ((float)((pointX + currency) - 1)* (1f/3f)));
         }
 
         if (pointY + currency >= height){

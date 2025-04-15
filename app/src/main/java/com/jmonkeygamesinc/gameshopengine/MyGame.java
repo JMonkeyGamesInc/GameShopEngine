@@ -98,11 +98,11 @@ public final class MyGame extends SimpleApplication {
 
 
         float zAxis = 0f;//this.getCamera().getFrustumNear();
-        GameShopATMS atmsUI = new GameShopATMS("BlueSquare", 256,256, new Vector4f[]{new Vector4f(0,1,0,1)});
+        GameShopATMS atmsUI = new GameShopATMS("BlueSquare", 192,108, new Vector4f[]{new Vector4f(0,1,0,1)});
 
        // atmsUI.layer.drawCircle(64,64, 64, ColorRGBA.fromRGBA255( 0,255,0,255));
         atmsUI.layer.drawSquare(32,64, 256, ColorRGBA.fromRGBA255( 0,0,255,128));
-        atmsUI.layer.drawCircle(128,128, 32, ColorRGBA.fromRGBA255( 0,255,0,128));
+        atmsUI.layer.drawCircle(96,54, 32, ColorRGBA.fromRGBA255( 0,255,0,128));
         //atmsUI.layer.drawAspectRatioSquare(96,128, 32, ColorRGBA.fromRGBA255( 255,0,0,128));
         //atmsUI.layer.drawAspectRatioSquare(64,32, 32, ColorRGBA.fromRGBA255( 255,0,255,128));
 
@@ -116,10 +116,10 @@ public final class MyGame extends SimpleApplication {
 
         //for (int i = 0; i < 4; i += 1){
 
-        clUI[0] = new GameShopCurrencyLine(new Vector3f[]{ new Vector3f(-0f, -1, zAxis), new Vector3f(1f, -1, zAxis), new Vector3f(1f,-1, zAxis), new Vector3f(2f,-1, zAxis)}, 2);
-        clUI[1] = new GameShopCurrencyLine(new Vector3f[]{ new Vector3f(-0f,-.33f, zAxis), new Vector3f(1f,-.33f, zAxis), new Vector3f(1f,-.33f, zAxis), new Vector3f(2f,-.33f, zAxis)}, 2);
-        clUI[2] = new GameShopCurrencyLine(new Vector3f[]{ new Vector3f(-0f,.33f, zAxis), new Vector3f(1f,.33f, zAxis), new Vector3f(1f,.33f, zAxis), new Vector3f(2f,.33f, zAxis)}, 2);
-        clUI[3] = new GameShopCurrencyLine(new Vector3f[]{ new Vector3f(-0f,1, zAxis), new Vector3f(1f,1, zAxis), new Vector3f(1f,1, zAxis), new Vector3f(2f,1, zAxis)}, 2);
+        clUI[0] = new GameShopCurrencyLine(new Vector3f[]{ new Vector3f(-1.35f, -1.35f, zAxis), new Vector3f(1f, -1.35f, zAxis), new Vector3f(1f,-1.35f, zAxis), new Vector3f(3.35f,-1.35f, zAxis)}, 2);
+        clUI[1] = new GameShopCurrencyLine(new Vector3f[]{ new Vector3f(-1.35f,-.33f, zAxis), new Vector3f(1f,-.33f, zAxis), new Vector3f(1f,-.33f, zAxis), new Vector3f(3.35f,-.33f, zAxis)}, 2);
+        clUI[2] = new GameShopCurrencyLine(new Vector3f[]{ new Vector3f(-1.35f,.33f, zAxis), new Vector3f(1f,.33f, zAxis), new Vector3f(1f,.33f, zAxis), new Vector3f(3.35f,.33f, zAxis)}, 2);
+        clUI[3] = new GameShopCurrencyLine(new Vector3f[]{ new Vector3f(-1.35f,1.35f, zAxis), new Vector3f(1f,1.35f, zAxis), new Vector3f(1f,1.35f, zAxis), new Vector3f(3.35f,1.35f, zAxis)}, 2);
 
        // }
 

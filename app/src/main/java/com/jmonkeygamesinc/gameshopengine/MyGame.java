@@ -12,6 +12,7 @@ import com.jme3.math.Vector4f;
 import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.scene.Node;
 import com.jmonkeygamesinc.gameshopengine.jme3.gameshopui.GameShopUICurrencyMesh;
+import com.jmonkeygamesinc.gameshopengine.jme3.gameshopui.widgets.Alphabet;
 import com.jmonkeygamesinc.gameshopengine.jme3.global.GameShopCurrencyMeshHash;
 import com.jmonkeygamesinc.gameshopengine.jme3.graphics.GameShopATMS;
 import com.jmonkeygamesinc.gameshopengine.jme3.graphics.GameShopCurrencyLine;
@@ -100,11 +101,16 @@ public final class MyGame extends SimpleApplication {
 
         GameShopATMS testLayer = new GameShopATMS("TestLayer" ,75,25, new Vector4f[]{new Vector4f(0,1,0,1)});
 
+        Alphabet letterUpperCaseA = new Alphabet('A', 25, 25);
+        letterUpperCaseA.generateCharacter();
+
+        //testLayer.layer.drawCircle(0,0,90, ColorRGBA.fromRGBA255(0,0,0,0));
         testLayer.layer.drawCircle(0,0,90, ColorRGBA.fromRGBA255(255,0,0,255));
 
 
+        testLayer.layer.copyLayer(letterUpperCaseA.layer, new Vector2f(0,0));
         float zAxis = 0f;//this.getCamera().getFrustumNear();
-        GameShopATMS atmsUI = new GameShopATMS("BlueSquare", 192,108, new Vector4f[]{new Vector4f(0,1,0,1)});
+        GameShopATMS atmsUI = new GameShopATMS("GameShopUI", 1920,1080, new Vector4f[]{new Vector4f(0,1,0,1)});
 
        // atmsUI.layer.drawCircle(64,64, 64, ColorRGBA.fromRGBA255( 0,255,0,255));
         atmsUI.layer.drawSquare(32,64, 256, ColorRGBA.fromRGBA255( 0,0,255,255));
@@ -112,7 +118,7 @@ public final class MyGame extends SimpleApplication {
         //atmsUI.layer.drawAspectRatioSquare(96,128, 32, ColorRGBA.fromRGBA255( 255,0,0,128));
         //atmsUI.layer.drawAspectRatioSquare(64,32, 32, ColorRGBA.fromRGBA255( 255,0,255,128));
 
-        atmsUI.layer.copyLayer(testLayer.layer, new Vector2f(0f, 83f));
+        atmsUI.layer.copyLayer(testLayer.layer, new Vector2f(0f, 1055f));
         GameShopCurrencyLine[] clUI = new GameShopCurrencyLine[4];
 
 //        for (int i = 0; i < 4; i += 1){
@@ -123,10 +129,10 @@ public final class MyGame extends SimpleApplication {
 
         //for (int i = 0; i < 4; i += 1){
 
-        clUI[0] = new GameShopCurrencyLine(new Vector3f[]{ new Vector3f(-1.35f, -1.35f, zAxis), new Vector3f(1f, -1.35f, zAxis), new Vector3f(1f,-1.35f, zAxis), new Vector3f(3.35f,-1.35f, zAxis)}, 2);
-        clUI[1] = new GameShopCurrencyLine(new Vector3f[]{ new Vector3f(-1.35f,-.33f, zAxis), new Vector3f(1f,-.33f, zAxis), new Vector3f(1f,-.33f, zAxis), new Vector3f(3.35f,-.33f, zAxis)}, 2);
-        clUI[2] = new GameShopCurrencyLine(new Vector3f[]{ new Vector3f(-1.35f,.33f, zAxis), new Vector3f(1f,.33f, zAxis), new Vector3f(1f,.33f, zAxis), new Vector3f(3.35f,.33f, zAxis)}, 2);
-        clUI[3] = new GameShopCurrencyLine(new Vector3f[]{ new Vector3f(-1.35f,1.35f, zAxis), new Vector3f(1f,1.35f, zAxis), new Vector3f(1f,1.35f, zAxis), new Vector3f(3.35f,1.35f, zAxis)}, 2);
+        clUI[0] = new GameShopCurrencyLine(new Vector3f[]{ new Vector3f(-1.335f, -1.335f, zAxis), new Vector3f(1f, -1.335f, zAxis), new Vector3f(1f,-1.335f, zAxis), new Vector3f(3.335f,-1.335f, zAxis)}, 2);
+        clUI[1] = new GameShopCurrencyLine(new Vector3f[]{ new Vector3f(-1.335f,-.33f, zAxis), new Vector3f(1f,-.33f, zAxis), new Vector3f(1f,-.33f, zAxis), new Vector3f(3.3f,-.33f, zAxis)}, 2);
+        clUI[2] = new GameShopCurrencyLine(new Vector3f[]{ new Vector3f(-1.335f,.33f, zAxis), new Vector3f(1f,.33f, zAxis), new Vector3f(1f,.33f, zAxis), new Vector3f(3.3f,.33f, zAxis)}, 2);
+        clUI[3] = new GameShopCurrencyLine(new Vector3f[]{ new Vector3f(-1.335f,1.335f, zAxis), new Vector3f(1f,1.335f, zAxis), new Vector3f(1f,1.335f, zAxis), new Vector3f(3.335f,1.335f, zAxis)}, 2);
 
        // }
 

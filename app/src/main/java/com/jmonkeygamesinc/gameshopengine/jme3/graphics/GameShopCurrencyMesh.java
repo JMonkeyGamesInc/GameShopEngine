@@ -199,7 +199,7 @@ public class GameShopCurrencyMesh {
 //              }
 //           }
 //        }
-       System.out.println(vertices.length);
+    //   System.out.println(vertices.length);
 //        System.out.println(Arrays.toString(vertices));
     }
 
@@ -297,12 +297,12 @@ public class GameShopCurrencyMesh {
                         isBreak = true;
                         break;
                     }
-                    System.out.println("numPoints " + gspl.numPoints);
+                   // System.out.println("numPoints " + gspl.numPoints);
 
                    // if (i >= gspl.numPoints  && (int)( (float)((i) * gspl.numPoints) % gspl.numPoints) == 0){
 
                     if (lineNum == gspl.numPoints){
-                        System.out.println("i" + i);
+                     //   System.out.println("i" + i);
                         indices[index] = 0;
                         indices[index + 1] = 0;
                         indices[index + 2] = 0;
@@ -374,8 +374,8 @@ public class GameShopCurrencyMesh {
         }
 
         indices = Arrays.copyOfRange(indices, 0, finalIndex);
-        System.out.println("indices");
-        System.out.println(Arrays.toString(indices));
+       // System.out.println("indices");
+       // System.out.println(Arrays.toString(indices));
     }
 
     public void allocateTexCoords(){
@@ -404,8 +404,8 @@ public class GameShopCurrencyMesh {
             int maxLines = gsps.vInfinitesimals.length;
             int lines = 0;
 
-            System.out.println("currencyLines " + gsps.currencyLines.length);
-            System.out.println("vInfinitesimals " + gsps.vInfinitesimals.length);
+            //System.out.println("currencyLines " + gsps.currencyLines.length);
+            //System.out.println("vInfinitesimals " + gsps.vInfinitesimals.length);
 
         }
 
@@ -611,7 +611,9 @@ public class GameShopCurrencyMesh {
 
    // public void outputHashValues(){
 
-//      System.out.println(GameShopIndexHash.getInstance().indexHash.get(this));
+//
+//
+//      (GameShopIndexHash.getInstance().indexHash.get(this));
 //      System.out.println(GameShopShaderHash.getInstance().getGLShaderProgram("Hello GameShop"));
 //      System.out.println(GameShopShapeHash.getInstance().shapeHash.get(this));
 //      System.out.println(GameShopVertexHash.getInstance().vertexHash.get(this));

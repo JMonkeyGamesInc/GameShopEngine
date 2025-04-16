@@ -352,7 +352,7 @@ public class Selector {
                     selectors.get(index).setMaterial(material);
                     selectedSelector = selectors.get(index);
                     enableMove();
-                    System.out.println("SELECTED " + index);
+                  //  System.out.println("SELECTED " + index);
                     break;
                 }
 
@@ -381,7 +381,7 @@ public class Selector {
                                 selectors.get(index).setMaterial(material);
                                 selectedSelector = selectors.get(index);
                                 enableMove();
-                                System.out.println("SELECTED " + (index));
+                             //   System.out.println("SELECTED " + (index));
                                 found = true;
                                 break;
                             }
@@ -437,7 +437,7 @@ public class Selector {
                    // if (action.equals("SELECT")){
 
                         // 4. Print the results
-                        System.out.println("----- Collisions? " + results.size() + "-----");
+                      //  System.out.println("----- Collisions? " + results.size() + "-----");
                         int count = 0;
                         for (int i = 0; i < results.size(); i++){
 
@@ -472,8 +472,8 @@ public class Selector {
                                 float dist = results.getCollision(i).getDistance();
                                 Vector3f pt = results.getCollision(i).getContactPoint();
 
-                                System.out.println("* Collision #" + i);
-                                System.out.println("  You shot " + hit + " at " + pt + ", " + dist + " wu away.");
+                            //    System.out.println("* Collision #" + i);
+                              //  System.out.println("  You shot " + hit + " at " + pt + ", " + dist + " wu away.");
 
 //                                if (mode.equals("NONE")) {
 //                                    //selectedCM = CurrencyMeshSingleton.getInstance().cMeshes.get(Integer.parseInt(hit.split(" ")[1]));
@@ -525,8 +525,8 @@ public class Selector {
                             float dist = results.getCollision(i).getDistance();
                             Vector3f pt = results.getCollision(i).getContactPoint();
 
-                            System.out.println("* Collision #" + i);
-                            System.out.println("  You shot " + hit + " at " + pt + ", " + dist + " wu away.");
+                          //  System.out.println("* Collision #" + i);
+                          //  System.out.println("  You shot " + hit + " at " + pt + ", " + dist + " wu away.");
 
                             if (mode.equals("NONE")) {
                                 //selectedCM = CurrencyMeshSingleton.getInstance().cMeshes.get(Integer.parseInt(hit.split(" ")[1]));
@@ -598,8 +598,8 @@ public class Selector {
 
                     Vector2f currentPosition = new Vector2f(event.getX(), event.getY());
                     Vector3f moveDir = new Vector3f();
-                    System.out.println("LAST " + lastPosition);
-                    System.out.println("CURRENT " + currentPosition);
+                  //  System.out.println("LAST " + lastPosition);
+                  //  System.out.println("CURRENT " + currentPosition);
                     float moveFactor = 0.01f;
                     for (int i = 0; i < 6; i++){
 
@@ -608,7 +608,7 @@ public class Selector {
 
                             if (currentPosition.distance(lastPosition) > 0f){
 
-                                System.out.println("Moving");
+                               // System.out.println("Moving");
                                 if (i == 0){
 
                                     if (currentPosition.x - lastPosition.x > 0){
@@ -761,7 +761,7 @@ public class Selector {
 
             //selectedVector3f = new Vector3f(selectedVector3f.add(distance));
             Objects.requireNonNull(GameShopCurrencyMeshHash.getInstance().cMeshes.get(lastL)).gspSurfaces[lastK].currencyLines[lastJ].moveCurrency(lastI,             Objects.requireNonNull(GameShopCurrencyMeshHash.getInstance().cMeshes.get(lastL)).gspSurfaces[lastK].currencyLines[lastJ].points[lastI].add(distance));
-            System.out.println("LINE: " + Objects.requireNonNull(GameShopCurrencyMeshHash.getInstance().cMeshes.get(lastL)).gspSurfaces[lastK].currencyLines[lastJ].points[lastI]);
+           // System.out.println("LINE: " + Objects.requireNonNull(GameShopCurrencyMeshHash.getInstance().cMeshes.get(lastL)).gspSurfaces[lastK].currencyLines[lastJ].points[lastI]);
 //        System.out.println("LINE: " +         CurrencyMeshSingleton.getInstance().cMeshes.get(lastL).gspSurfaces[lastK].currencyLines[lastJ].points[lastI]);
             Objects.requireNonNull(GameShopCurrencyMeshHash.getInstance().cMeshes.get(lastL)).gspSurfaces[lastK].updateVerticalLines();
 

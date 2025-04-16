@@ -6,6 +6,7 @@ import android.os.Environment;
 import com.jme3.app.LegacyApplication;
 import com.jme3.app.SimpleApplication;
 import com.jme3.math.ColorRGBA;
+import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
 import com.jme3.math.Vector4f;
 import com.jme3.niftygui.NiftyJmeDisplay;
@@ -16,6 +17,7 @@ import com.jmonkeygamesinc.gameshopengine.jme3.graphics.GameShopATMS;
 import com.jmonkeygamesinc.gameshopengine.jme3.graphics.GameShopCurrencyLine;
 import com.jmonkeygamesinc.gameshopengine.jme3.graphics.GameShopCurrencyMesh;
 import com.jmonkeygamesinc.gameshopengine.jme3.graphics.GameShopCurrencySurface;
+import com.jmonkeygamesinc.gameshopengine.jme3.graphics.GameShopLayer;
 import com.jmonkeygamesinc.gameshopengine.jme3.niftygui.StartScreenController;
 import com.jmonkeygamesinc.gameshopengine.jme3.ui.Selector;
 
@@ -96,6 +98,10 @@ public final class MyGame extends SimpleApplication {
 
         //**********************//
 
+        GameShopATMS testLayer = new GameShopATMS("TestLayer" ,75,25, new Vector4f[]{new Vector4f(0,1,0,1)});
+
+        testLayer.layer.drawCircle(0,0,90, ColorRGBA.fromRGBA255(255,0,0,255));
+
 
         float zAxis = 0f;//this.getCamera().getFrustumNear();
         GameShopATMS atmsUI = new GameShopATMS("BlueSquare", 192,108, new Vector4f[]{new Vector4f(0,1,0,1)});
@@ -106,6 +112,7 @@ public final class MyGame extends SimpleApplication {
         //atmsUI.layer.drawAspectRatioSquare(96,128, 32, ColorRGBA.fromRGBA255( 255,0,0,128));
         //atmsUI.layer.drawAspectRatioSquare(64,32, 32, ColorRGBA.fromRGBA255( 255,0,255,128));
 
+        atmsUI.layer.copyLayer(testLayer.layer, new Vector2f(0f, 83f));
         GameShopCurrencyLine[] clUI = new GameShopCurrencyLine[4];
 
 //        for (int i = 0; i < 4; i += 1){

@@ -58,63 +58,80 @@ public class GameShopLayer {
 
     }
 
-    /**
-     color should be 0 to 255;
-     */
-    public void drawAspectRatioSquare(int pointX, int pointY, int currency, ColorRGBA color){
+    public void  copyLayer(GameShopLayer copy, Vector2f start){
 
-        int startX = -1;
-        int startY = -1;
-        int endX = -1;
-        int endY = -1;
+        for (int y = (int)start.y; y < start.y + copy.height; y++){
+            if (y >= 0 || y < height) {
+                for (int x = (int) start.x; x < start.x + copy.width; x++) {
 
-        //start with pointX and pointY, subtract radius to get the startPoint
-        //compare width and height bounds to edge
-        //check if width and height is in radius bounds
+                    if (x >= 0 || x < width) {
 
-        if (pointX - currency <= 0){
-            startX = 0;
-        } else {
-            startX = (int)((float)((pointX - (currency * (3f/7f))) + 1) );//+ (((float)((pointX - currency * (1f/3f)) + 1) * (1f/3f))));
-        }
+                        dir.setPixel(x, y, copy.dir.getPixel((int) (x - start.x), (int) (y - start.y)));
+                    }
 
-        if (pointY - currency <= 0){
-            startY = 0;
-        } else {
-            startY =  (int) ( (float)((pointY - (currency *(4f/3f))) + 1)); //+ (((float)((pointY - currency) + 1) *(1f/5f))));
-        }
 
-        if (pointX + currency >= width){
-            endX = width;
-        } else {
-            endX = (int)((float)((pointX + (currency *(3f/7f))) - 1) );// - ((float)((pointX + currency) - 1)* (1f/3f)));
-        }
-
-        if (pointY + currency >= height){
-            endY = height;
-        } else {
-            endY = (int)((float)((pointY + (currency *(4f/3f))) - 1)) ;//- ((float)((pointY + currency) - 1) * (1f/5f)));
-        }
-
-        //        System.out.println("StartX " + startX);
-////
-//        System.out.println("StartY " + startY);
-//
-//        System.out.println("EndX " + endX);
-//
-//        System.out.println("EndY " + endY);
-        for (int y = startY; y < endY; y++){
-
-            for (int x = startX; x < endX; x++) {
-//                layer[y][x * 4] =  (byte)(color.x);
-//                layer[y][(x * 4) + 1]  = (byte) (color.y);
-//                layer[y][(x * 4) + 2] = (byte) (color.z);
-//                layer[y][(x * 4) + 3]  = (byte) (color.w);
-//
-                dir.setPixel(x, y, color);
+                }
             }
         }
-    } 
+
+    }
+//    /**
+//     color should be 0 to 255;
+//     */
+//    public void drawAspectRatioSquare(int pointX, int pointY, int currency, ColorRGBA color){
+//
+//        int startX = -1;
+//        int startY = -1;
+//        int endX = -1;
+//        int endY = -1;
+//
+//        //start with pointX and pointY, subtract radius to get the startPoint
+//        //compare width and height bounds to edge
+//        //check if width and height is in radius bounds
+//
+//        if (pointX - currency <= 0){
+//            startX = 0;
+//        } else {
+//            startX = (int)((float)((pointX - (currency * (3f/7f))) + 1) );//+ (((float)((pointX - currency * (1f/3f)) + 1) * (1f/3f))));
+//        }
+//
+//        if (pointY - currency <= 0){
+//            startY = 0;
+//        } else {
+//            startY =  (int) ( (float)((pointY - (currency *(4f/3f))) + 1)); //+ (((float)((pointY - currency) + 1) *(1f/5f))));
+//        }
+//
+//        if (pointX + currency >= width){
+//            endX = width;
+//        } else {
+//            endX = (int)((float)((pointX + (currency *(3f/7f))) - 1) );// - ((float)((pointX + currency) - 1)* (1f/3f)));
+//        }
+//
+//        if (pointY + currency >= height){
+//            endY = height;
+//        } else {
+//            endY = (int)((float)((pointY + (currency *(4f/3f))) - 1)) ;//- ((float)((pointY + currency) - 1) * (1f/5f)));
+//        }
+//
+//        //        System.out.println("StartX " + startX);
+//////
+////        System.out.println("StartY " + startY);
+////
+////        System.out.println("EndX " + endX);
+////
+////        System.out.println("EndY " + endY);
+//        for (int y = startY; y < endY; y++){
+//
+//            for (int x = startX; x < endX; x++) {
+////                layer[y][x * 4] =  (byte)(color.x);
+////                layer[y][(x * 4) + 1]  = (byte) (color.y);
+////                layer[y][(x * 4) + 2] = (byte) (color.z);
+////                layer[y][(x * 4) + 3]  = (byte) (color.w);
+////
+//                dir.setPixel(x, y, color);
+//            }
+//        }
+//    }
     
     
     /**

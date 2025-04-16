@@ -66,7 +66,11 @@ public class GameShopLayer {
 
                     if (x >= 0 || x < width) {
 
+                        if (copy.dir.getPixel((int) (x - start.x), (int) (y - start.y)).a == 0f){
+                            continue;
+                        }
                         dir.setPixel(x, y, copy.dir.getPixel((int) (x - start.x), (int) (y - start.y)));
+
                     }
 
 

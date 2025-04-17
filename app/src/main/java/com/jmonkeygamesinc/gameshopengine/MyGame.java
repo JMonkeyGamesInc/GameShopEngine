@@ -101,7 +101,7 @@ public final class MyGame extends SimpleApplication {
 
         GameShopATMS testLayer = new GameShopATMS("TestLayer" ,75,25, new Vector4f[]{new Vector4f(0,1,0,1)});
 
-        Alphabet letterUpperCaseA = new Alphabet('A', 25, 25);
+        Alphabet letterUpperCaseA = new Alphabet('C', 25, 25);
         letterUpperCaseA.generateCharacter();
 
         //testLayer.layer.drawCircle(0,0,90, ColorRGBA.fromRGBA255(0,0,0,0));

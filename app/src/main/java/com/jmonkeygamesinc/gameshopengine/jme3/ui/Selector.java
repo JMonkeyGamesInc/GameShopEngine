@@ -8,10 +8,12 @@ import com.jme3.input.controls.TouchListener;
 import com.jme3.input.controls.TouchTrigger;
 import com.jme3.input.event.TouchEvent;
 import com.jme3.material.Material;
+import com.jme3.material.RenderState;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Ray;
 import com.jme3.math.Vector2f;
 import com.jme3.math.Vector3f;
+import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.shape.Box;
 import com.jmonkeygamesinc.gameshopengine.jme3.global.GameShopCurrencyMeshHash;
@@ -121,10 +123,14 @@ public class Selector {
         for (Geometry g: selectors){
 
             Material material = new Material(app.getAssetManager().loadAsset(new AssetKey<>("Common/MatDefs/Misc/Unshaded.j3md")));
+            
+        material.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
+        material.setTransparent(true); //not sure if it was needed rly
+        g.setQueueBucket(RenderQueue.Bucket.Transparent);
              if (!mode.equals("CURRENCYSURFACE")) {
-            material.setColor("Color", ColorRGBA.Red);
+            material.setColor("Color", ColorRGBA.fromRGBA255(255,0,0,128));
                             } else {
-                                material.setColor("Color", ColorRGBA.Orange);
+                                material.setColor("Color", ColorRGBA.fromRGBA255(255,69,0,128));
                             }
             g.setMaterial(material);
 
@@ -147,7 +153,11 @@ public class Selector {
         for (Geometry g: movers){
 
             Material material = new Material(app.getAssetManager().loadAsset(new AssetKey<>("Common/MatDefs/Misc/Unshaded.j3md")));
-            material.setColor("Color", ColorRGBA.Red);
+           
+        material.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
+        material.setTransparent(true); //not sure if it was needed rly
+        g.setQueueBucket(RenderQueue.Bucket.Transparent);
+            material.setColor("Color",ColorRGBA.fromRGBA255(255,0,0,128));
             g.setMaterial(material);
 
         }
@@ -174,7 +184,7 @@ public class Selector {
                 Box box = new Box(.5f, .5f, .5f);
                 Geometry geom = new Geometry("SelectBox " + i, box);
                 Material material = new Material(app.getAssetManager().loadAsset(new AssetKey<>("Common/MatDefs/Misc/Unshaded.j3md")));
-                material.setColor("Color", ColorRGBA.Red);
+                material.setColor("Color", ColorRGBA.fromRGBA255(255,0,0,128));
                 geom.setMaterial(material);
                 geom.setLocalTranslation(cm.gspSurfaces[0].vInfinitesimals[cm.gspSurfaces[0].vInfinitesimals.length / 2].infinitesimals[cm.gspSurfaces[0].vInfinitesimals[cm.gspSurfaces[0].vInfinitesimals.length / 2].infinitesimals.length / 2]);
                 app.getRootNode().attachChild(geom);
@@ -190,7 +200,11 @@ public class Selector {
                     Box box = new Box(.5f, .5f, .5f);
                     Geometry geom = new Geometry("SelectBox " + i, box);
                     Material material = new Material(app.getAssetManager().loadAsset(new AssetKey<>("Common/MatDefs/Misc/Unshaded.j3md")));
-                    material.setColor("Color", ColorRGBA.Orange);
+                    material.setColor("Color", ColorRGBA.fromRGBA255(255,69,0,128));
+                    
+        material.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
+        material.setTransparent(true); //not sure if it was needed rly
+        geom.setQueueBucket(RenderQueue.Bucket.Transparent);
                     geom.setMaterial(material);
                     geom.setLocalTranslation(cm.gspSurfaces[0].vInfinitesimals[cm.gspSurfaces[0].vInfinitesimals.length / 2].infinitesimals[cm.gspSurfaces[0].vInfinitesimals[cm.gspSurfaces[0].vInfinitesimals.length / 2].infinitesimals.length / 2]);
 
@@ -216,7 +230,11 @@ public class Selector {
                             Box box = new Box(.25f, .25f, .25f);
                             Geometry geom = new Geometry("SelectBox " + i, box);
                             Material material = new Material(app.getAssetManager().loadAsset(new AssetKey<>("Common/MatDefs/Misc/Unshaded.j3md")));
-                            material.setColor("Color", ColorRGBA.Orange);
+                            material.setColor("Color", ColorRGBA.fromRGBA255(255,69, 0,128));
+                            
+        material.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
+        material.setTransparent(true); //not sure if it was needed rly
+        geom.setQueueBucket(RenderQueue.Bucket.Transparent);
                             geom.setMaterial(material);
                             geom.setLocalTranslation(v);
 
@@ -250,7 +268,7 @@ public class Selector {
                             Material material = new Material(app.getAssetManager().loadAsset(new AssetKey<>("Common/MatDefs/Misc/Unshaded.j3md")));
 
                            // if (!mode.equals("CURRENCYSURFACE")) {
-                                material.setColor("Color", ColorRGBA.Red);
+                                material.setColor("Color", ColorRGBA.fromRGBA255(255,0,0,128));
 //                            } else {
 //                                material.setColor("Color", ColorRGBA.Orange);
 //                            }
@@ -297,7 +315,7 @@ public class Selector {
                             Box box = new Box(.20f, .20f, .20f);
                             Geometry geom = new Geometry("MoveBox " + i, box);
                             Material material = new Material(app.getAssetManager().loadAsset(new AssetKey<>("Common/MatDefs/Misc/Unshaded.j3md")));
-                            material.setColor("Color", ColorRGBA.Red);
+                            material.setColor("Color", ColorRGBA.fromRGBA255(255,0,0,128));
                             geom.setMaterial(material);
                             geom.setLocalTranslation(g.getLocalTranslation());
                             //LEFT RIGHT TOP BOTTOM FORWARD BACKWARD
@@ -339,7 +357,7 @@ public class Selector {
     public void selectFromHierarchy(int index){
 
         Material material = new Material(app.getAssetManager().loadAsset(new AssetKey<>("Common/MatDefs/Misc/Unshaded.j3md")));
-        material.setColor("Color", ColorRGBA.Blue);
+        material.setColor("Color", ColorRGBA.fromRGBA255(0,0,255,128));
 
 
        int i = 0;
@@ -488,7 +506,7 @@ public class Selector {
                                 if (mode.equals("CURRENCYMESH")){
 
                                     Material material = new Material(app.getAssetManager().loadAsset(new AssetKey<>("Common/MatDefs/Misc/Unshaded.j3md")));
-                                    material.setColor("Color", ColorRGBA.Blue);
+                                    material.setColor("Color", ColorRGBA.fromRGBA255(0,0,255,128));
 
                                     movers.get(Integer.parseInt(hit.split(" ")[1])).setMaterial(material);
                                     selectedMover = movers.get(Integer.parseInt(hit.split(" ")[1]));
@@ -496,7 +514,7 @@ public class Selector {
 
                                 } else if (mode.equals("CURRENCYSURFACE")){
                                     Material material = new Material(app.getAssetManager().loadAsset(new AssetKey<>("Common/MatDefs/Misc/Unshaded.j3md")));
-                                    material.setColor("Color", ColorRGBA.Blue);
+                                    material.setColor("Color", ColorRGBA.fromRGBA255(0,0,255,128));
 
                                     movers.get(Integer.parseInt(hit.split(" ")[1])).setMaterial(material);
                                     selectedMover = movers.get(Integer.parseInt(hit.split(" ")[1]));
@@ -532,14 +550,14 @@ public class Selector {
                                 //selectedCM = CurrencyMeshSingleton.getInstance().cMeshes.get(Integer.parseInt(hit.split(" ")[1]));
 
                                 Material material = new Material(app.getAssetManager().loadAsset(new AssetKey<>("Common/MatDefs/Misc/Unshaded.j3md")));
-                                material.setColor("Color", ColorRGBA.Blue);
+                                material.setColor("Color",  ColorRGBA.fromRGBA255(0,0,255,128));
 
                                 selectors.get(Integer.parseInt(hit.split(" ")[1])).setMaterial(material);
                                 selectedSelector = selectors.get(Integer.parseInt(hit.split(" ")[1]));
                             } else if (mode.equals("CURRENCYMESH")){
 
                                 Material material = new Material(app.getAssetManager().loadAsset(new AssetKey<>("Common/MatDefs/Misc/Unshaded.j3md")));
-                                material.setColor("Color", ColorRGBA.Blue);
+                                material.setColor("Color", ColorRGBA.fromRGBA255(0,0,255,128));
 
                                 selectors.get(Integer.parseInt(hit.split(" ")[1])).setMaterial(material);
                                 selectedSelector = selectors.get(Integer.parseInt(hit.split(" ")[1]));
@@ -547,7 +565,7 @@ public class Selector {
 
                             } else if (mode.equals("CURRENCYSURFACE")){
                                 Material material = new Material(app.getAssetManager().loadAsset(new AssetKey<>("Common/MatDefs/Misc/Unshaded.j3md")));
-                                material.setColor("Color", ColorRGBA.Blue);
+                                material.setColor("Color", ColorRGBA.fromRGBA255(0,0,255,128));
 
                                 selectors.get(Integer.parseInt(hit.split(" ")[1])).setMaterial(material);
                                 selectedSelector = selectors.get(Integer.parseInt(hit.split(" ")[1]));

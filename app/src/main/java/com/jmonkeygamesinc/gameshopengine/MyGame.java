@@ -76,10 +76,15 @@ public final class MyGame extends SimpleApplication {
 //        geometry.setMaterial(material);
 //        rootNode.attachChild(geometry);
 
-        GameShopATMS atms = new GameShopATMS("Circle", 128,128, new Vector4f[]{new Vector4f(0,1,0,1)});
+        GameShopATMS atms = new GameShopATMS("Rune", 128,128, new Vector4f[]{new Vector4f(0,1,0,1)});
 
-        atms.layer.drawCircle(64,64, 64, ColorRGBA.fromRGBA255( 0,255,0,255));
-        atms.layer.drawCircle(32,64, 32, ColorRGBA.fromRGBA255( 255,255,255,255));
+        atms.layer.drawCircle(64,64, 128, ColorRGBA.fromRGBA255( 0,0,0,255));
+        atms.layer.drawRectangle(new Vector2f(32, 64), new Vector2f(118, 108),  ColorRGBA.fromRGBA255( 255,255,255,255));
+        atms.layer.drawRectangle(new Vector2f(32, 32), new Vector2f(48, 64),  ColorRGBA.fromRGBA255( 255,255,255,255));
+
+
+        // atms.layer.drawCircle(64,64, 64, ColorRGBA.fromRGBA255( 0,255,0,255));
+       // atms.layer.drawCircle(32,64, 32, ColorRGBA.fromRGBA255( 255,255,255,255));
 
         GameShopCurrencyLine[] cl = new GameShopCurrencyLine[4];
 
@@ -101,7 +106,7 @@ public final class MyGame extends SimpleApplication {
 
         GameShopATMS testLayer = new GameShopATMS("TestLayer" ,75,25, new Vector4f[]{new Vector4f(0,1,0,1)});
 
-        Alphabet letterUpperCaseA = new Alphabet('C', 25, 25);
+        Alphabet letterUpperCaseA = new Alphabet('A', 25, 25);
         letterUpperCaseA.generateCharacter();
 
         //testLayer.layer.drawCircle(0,0,90, ColorRGBA.fromRGBA255(0,0,0,0));

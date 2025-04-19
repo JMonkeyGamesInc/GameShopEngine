@@ -79,9 +79,11 @@ public final class MyGame extends SimpleApplication {
         GameShopATMS atms = new GameShopATMS("Rune", 128,128, new Vector4f[]{new Vector4f(0,1,0,1)});
 
         atms.layer.drawCircle(64,64, 128, ColorRGBA.fromRGBA255( 0,0,0,255));
+        atms.layer.drawLine(new Vector2f(28, 48), new Vector2f(54, 16), (short)8, ColorRGBA.fromRGBA255(255,220,171,255));
+
         atms.layer.drawRectangle(new Vector2f(32, 64), new Vector2f(118, 108),  ColorRGBA.fromRGBA255( 255,255,255,255));
         atms.layer.drawRectangle(new Vector2f(32, 32), new Vector2f(48, 64),  ColorRGBA.fromRGBA255( 255,255,255,255));
-
+        atms.layer.drawRectangle(new Vector2f(48, 16), new Vector2f(118, 64),ColorRGBA.fromRGBA255( 255,220,171,255) );
 
         // atms.layer.drawCircle(64,64, 64, ColorRGBA.fromRGBA255( 0,255,0,255));
        // atms.layer.drawCircle(32,64, 32, ColorRGBA.fromRGBA255( 255,255,255,255));

@@ -272,6 +272,10 @@ public class Selector {
 //                            } else {
 //                                material.setColor("Color", ColorRGBA.Orange);
 //                            }
+                            
+        material.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
+        material.setTransparent(true); //not sure if it was needed rly
+        geom.setQueueBucket(RenderQueue.Bucket.Transparent);
                             geom.setMaterial(material);
                             geom.setLocalTranslation(g.getLocalTranslation());
                             //LEFT RIGHT TOP BOTTOM FORWARD BACKWARD
@@ -316,6 +320,12 @@ public class Selector {
                             Geometry geom = new Geometry("MoveBox " + i, box);
                             Material material = new Material(app.getAssetManager().loadAsset(new AssetKey<>("Common/MatDefs/Misc/Unshaded.j3md")));
                             material.setColor("Color", ColorRGBA.fromRGBA255(255,0,0,128));
+                            
+                            
+        material.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
+        material.setTransparent(true); //not sure if it was needed rly
+        geom.setQueueBucket(RenderQueue.Bucket.Transparent);
+                            
                             geom.setMaterial(material);
                             geom.setLocalTranslation(g.getLocalTranslation());
                             //LEFT RIGHT TOP BOTTOM FORWARD BACKWARD
@@ -359,6 +369,10 @@ public class Selector {
         Material material = new Material(app.getAssetManager().loadAsset(new AssetKey<>("Common/MatDefs/Misc/Unshaded.j3md")));
         material.setColor("Color", ColorRGBA.fromRGBA255(0,0,255,128));
 
+        
+        material.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
+        material.setTransparent(true); //not sure if it was needed rly
+       // g.setQueueBucket(RenderQueue.Bucket.Transparent);
 
        int i = 0;
 

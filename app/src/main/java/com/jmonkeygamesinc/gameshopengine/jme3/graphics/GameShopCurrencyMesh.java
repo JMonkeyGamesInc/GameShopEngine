@@ -549,7 +549,7 @@ public class GameShopCurrencyMesh {
 
         Texture2D texture = new Texture2D(this.atms.makeATMS());
 
-        mat.setColor("Color", ColorRGBA.fromRGBA255(128,128,128,128));
+        mat.setColor("Color", ColorRGBA.fromRGBA255(255,255,255,255));
 
         mat.setTexture("ColorMap", texture);
 
